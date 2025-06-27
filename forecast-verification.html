@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forecast Verification | NCHM</title>
+    <link rel="stylesheet" href="climatedata.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@400;700;900&display=swap">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
+<body>
+    <div class="page-container">
+        <header>
+            <h1>Meteorological Services Division</h1>
+            <h3>Weather Forecasting Section</h3>
+        </header>
+        <nav class="main-nav">
+            <div class="nav-container">
+                <div class="social-container">
+                    <a href="https://www.facebook.com/NationalCentreforHydrologyandMeteorology" target="_blank" rel="noopener" class="social-link" title="NCHM Facebook Page"><i class="fa fa-facebook"></i></a>
+                </div>
+                <button type="button" class="menu-toggle" id="menuToggle" title="Toggle Menu">
+                    <span class="menu-icon"></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="home-link"><i class="fa fa-home"></i> Home</a></li>
+                    <li><a href="index.html#forecasting">Forecasting Tools</a></li>
+                    <li><a href="index.html#weather-services">Weather Services</a></li>
+                    <li><a href="index.html#climate-guidance">Climate Guidance</a></li>
+                    <li><a href="index.html#verification" class="active">Verification</a></li>
+                    <li><a href="index.html#documentation">Weather Formats</a></li>
+                    <li><a href="index.html#reports">Reports</a></li>
+                </ul>
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Search..." aria-label="Search">
+                    <button type="button" id="search-button" title="Search"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </nav>
+        <main class="main-content">
+            <section class="content-section">
+                <div class="section-header">
+                    <h2>Forecast Verification</h2>
+                </div>
+                <div class="section-content">
+                    <a href="index.html#verification" class="back-link"><i class="fa fa-arrow-left"></i> Back to Verification</a>
+                    <div class="verification-detail" data-aos="fade-up">
+                        <div class="verification-header">
+                            <h3>Forecast Verification</h3>
+                            <p>Statistical analysis of forecast accuracy over time</p>
+                        </div>
+                        <div class="verification-body">
+                            <div class="verification-content">
+                                <div class="verification-text">
+                                    <p>Forecast verification is a crucial process to assess the accuracy and reliability of weather forecasts. NCHM uses a range of verification metrics and methods to evaluate the performance of our forecasting models and forecasters. This helps us identify areas for improvement and provide users with accurate information on forecast uncertainty.</p>
+                                    <p>Our verification process includes comparing forecasts against observed data from weather stations, satellite imagery, and radar. We analyze various forecast parameters such as temperature, precipitation, wind speed, and atmospheric pressure to provide a comprehensive assessment of forecast performance.</p>
+                                    <table class="metrics-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Metric</th>
+                                                <th>Description</th>
+                                                <th>Typical Values</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Mean Error (ME)</td>
+                                                <td>Average difference between forecasts and observations</td>
+                                                <td>±0.5°C (temperature)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Root Mean Square Error (RMSE)</td>
+                                                <td>Square root of the average squared differences</td>
+                                                <td>1.2-2.5°C (temperature)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Threat Score (TS)</td>
+                                                <td>Measure of precipitation forecast accuracy</td>
+                                                <td>0.3-0.6 (precipitation)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Probability of Detection (POD)</td>
+                                                <td>Fraction of observed events correctly forecast</td>
+                                                <td>0.6-0.8 (precipitation)</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="verification-chart">
+                                    <img src="holder_images/forecast-verification.jpg" alt="Forecast Verification Chart">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <footer class="footer">
+                <p class="address">Weather Forecasting Section, MSD</p>
+                <p class="email"><i>wfcr@nchm.gov.bt</i></p>
+                <p class="phone">+975-335578 | +975-77452632</p>
+            </footer>
+        </main>
+    </div>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, easing: 'ease', once: true });
+        document.getElementById('menuToggle').addEventListener('click', function () {
+            document.querySelector('.nav-menu').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+    </script>
+</body>
+</html> 

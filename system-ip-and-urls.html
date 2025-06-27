@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System IPs and URLs - NCHM</title>
+    <link rel="stylesheet" href="climatedata.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@400;700;900&display=swap">
+</head>
+<body>
+    <div class="page-container">
+        <header>
+            <h1>Meteorological Services Division</h1>
+            <h3>Weather Forecasting Section</h3>
+        </header>
+        <!-- Navigation Bar -->
+        <nav class="main-nav">
+            <div class="nav-container">
+                <div class="social-container">
+                    <a href="https://www.facebook.com/NationalCentreforHydrologyandMeteorology" target="_blank" rel="noopener" class="social-link" title="NCHM Facebook Page"><i class="fa fa-facebook"></i></a>
+                </div>
+                <button type="button" class="menu-toggle" id="menuToggle" title="Toggle Menu">
+                    <span class="menu-icon"></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="index.html#home" class="home-link"><i class="fa fa-home"></i> Home</a></li>
+                    <li><a href="index.html#forecasting">Forecasting Tools</a></li>
+                    <li><a href="index.html#weather-services">Weather Services</a></li>
+                    <li><a href="index.html#climate-guidance">Climate Guidance</a></li>
+                    <li><a href="index.html#verification">Verification</a></li>
+                    <li><a href="index.html#weather-formats">Weather Formats</a></li>
+                    <li><a href="system-ip-and-urls.html" class="systems-link active">Systems</a></li>
+                </ul>
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Search..." aria-label="Search">
+                    <button type="button" id="search-button" title="Search"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </nav>
+        <main class="main-content">
+            <section class="content-section">
+                <div class="section-header">
+                    <h2>Systems List</h2>
+                </div>
+                <div class="section-content">
+                    <table class="systems-table">
+                        <thead>
+                            <tr>
+                                <th>System Name</th>
+                                <th>IP / URL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>NAS Server</td><td><a href="http://172.31.17.8:5000/" target="_blank" rel="noopener">http://172.31.17.8:5000/</a></td></tr>
+                            <tr><td>ims AWS- NAPA</td><td><a href="http://172.31.17.17/ims/html2/welcome.html" target="_blank" rel="noopener">http://172.31.17.17/ims/html2/welcome.html</a></td></tr>
+                            <tr><td>DMS</td><td><a href="http://172.31.17.7/login" target="_blank" rel="noopener">http://172.31.17.7/login</a></td></tr>
+                            <tr><td>GLOF</td><td><a href="http://119.2.119.46" target="_blank" rel="noopener">119.2.119.46</a></td></tr>
+                            <tr><td>Old WRF Server</td><td><a href="http://172.31.17.21" target="_blank" rel="noopener">172.31.17.21</a></td></tr>
+                            <tr><td>Severe Weather Forecasting Program</td><td><a href="https://nwp.imd.gov.in/mme/fdp-bob/login.php" target="_blank" rel="noopener">https://nwp.imd.gov.in/mme/fdp-bob/login.php</a></td></tr>
+                            <tr><td>New WRF server</td><td><a href="http://172.31.17.175" target="_blank" rel="noopener">172.31.17.175</a></td></tr>
+                            <tr><td>South Asia FFGS</td><td><a href="https://103.215.208.77/SASIAFFG_CONSOLE/index.php?region=0" target="_blank" rel="noopener">https://103.215.208.77/SASIAFFG_CONSOLE/index.php?region=0</a></td></tr>
+                            <tr><td>ECMWF ENS meteograms</td><td><a href="https://www.ecmwf.int/en/forecasts/charts/web/classical_meteogram_wmo?facets=undefined&time=2020051200,0,2020051200&epsgram=classical_10d&meteogram_location=London_United_Kingdom" target="_blank" rel="noopener">ECMWF ENS meteograms</a></td></tr>
+                            <tr><td>CDMS Central Data Management System</td><td><a href="http://202.144.145.98/" target="_blank" rel="noopener">http://202.144.145.98/</a></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <footer class="footer">
+                <p class="address">Weather Forecasting Section, MSD</p>
+                <p class="email"><i>wfcr@nchm.gov.bt</i></p>
+                <p class="phone">+975-335578 | +975-77452632</p>
+                <div class="admin-link">
+                    <a href="admin/login.html" title="Admin Login"><i class="fa fa-lock"></i> Admin</a>
+                </div>
+            </footer>
+        </main>
+    </div>
+    <style>
+        .systems-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+            background: #fff;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        .systems-table th, .systems-table td {
+            border: 1px solid #dee2e6;
+            padding: 12px 8px;
+            text-align: left;
+        }
+        .systems-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+        .systems-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        .systems-table a {
+            color: #0066cc;
+            text-decoration: underline;
+        }
+        .systems-table a:hover {
+            color: #cc0000;
+        }
+    </style>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease',
+            once: true
+        });
+        // Toggle navigation menu on mobile
+        document.getElementById('menuToggle').addEventListener('click', function(e) {
+            e.stopPropagation();
+            document.querySelector('.nav-menu').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navMenu = document.querySelector('.nav-menu');
+            const menuToggle = document.getElementById('menuToggle');
+            if (navMenu.classList.contains('active') &&
+                !navMenu.contains(event.target) &&
+                !menuToggle.contains(event.target)) {
+                navMenu.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Satellite Information | NCHM</title>
+    <link rel="stylesheet" href="climatedata.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@400;700;900&display=swap">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+        /* Inserted CSS from forecasting-tools.html lines 11-200 */
+        .tool-detail {
+            margin-bottom: 40px;
+            margin-top: 60px;
+            border-radius: var(--border-radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            background-color: var(--background-white);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .tool-detail:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        .tool-header {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 20px 25px;
+            position: relative;
+        }
+        .tool-header h3 {
+            margin: 0;
+            color: var(--text-light);
+            font-size: 1.5rem;
+        }
+        .tool-header p {
+            margin: 10px 0 0;
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+        .tool-body {
+            padding: 25px;
+        }
+        .tool-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: flex-start;
+        }
+        .tool-description {
+            flex: 3;
+            min-width: 300px;
+        }
+        .tool-image {
+            flex: 2;
+            min-width: 250px;
+            border-radius: var(--border-radius-sm);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        .tool-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        .tool-detail:hover .tool-image img {
+            transform: scale(1.03);
+        }
+        .tool-features {
+            margin-top: 20px;
+            background-color: var(--background-light);
+            padding: 15px;
+            border-radius: var(--border-radius-sm);
+            border-left: 3px solid var(--accent-color);
+        }
+        .tool-features h4 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+        .tool-features ul {
+            padding-left: 20px;
+            columns: 2;
+            column-gap: 30px;
+        }
+        .tool-features li {
+            margin-bottom: 8px;
+            break-inside: avoid;
+        }
+        .back-link {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: var(--border-radius-sm);
+            transition: all 0.3s ease;
+        }
+        .back-link:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        .data-table {
+            width: 90%;
+            border-collapse: collapse;
+            margin: 20px auto;
+            font-size: 0.9rem;
+            box-shadow: var(--shadow-sm);
+            border-radius: var(--border-radius-sm);
+            overflow: hidden;
+            background-color: var(--background-white);
+            table-layout: fixed;
+        }
+        .data-table th {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            text-align: left;
+            padding: 12px 15px;
+            font-weight: 600;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            -webkit-hyphens: auto;
+            hyphens: auto;
+            font-size: 0.85rem;
+        }
+        .data-table td {
+            padding: 10px 15px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            vertical-align: top;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            -webkit-hyphens: auto;
+            hyphens: auto;
+        }
+        .data-table tr:nth-child(even) {
+            background-color: var(--background-light);
+        }
+        .data-table tr:hover {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+        .data-table a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .data-table a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+        .data-table th:nth-child(1) { width: 15%; }
+        .data-table th:nth-child(2) { width: 30%; }
+        .data-table th:nth-child(3), .data-table th:nth-child(4) { width: 12%; }
+        .data-table th:nth-child(5) { width: 31%; }
+        .table-container { width: 100%; }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <header>
+            <h1>Meteorological Services Division</h1>
+            <h3>Weather Forecasting Section</h3>
+        </header>
+        <nav class="main-nav">
+            <div class="nav-container">
+                <div class="social-container">
+                    <a href="https://www.facebook.com/NationalCentreforHydrologyandMeteorology" target="_blank" rel="noopener" class="social-link" title="NCHM Facebook Page"><i class="fa fa-facebook"></i></a>
+                </div>
+                <button type="button" class="menu-toggle" id="menuToggle" title="Toggle Menu">
+                    <span class="menu-icon"></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="index.html#home" class="home-link"><i class="fa fa-home"></i> Home</a></li>
+                    <li><a href="index.html#forecasting">Forecasting Tools</a></li>
+                    <li><a href="index.html#weather-services">Weather Services</a></li>
+                    <li><a href="index.html#climate-guidance">Climate Guidance</a></li>
+                    <li><a href="index.html#verification">Verification</a></li>
+                    <li><a href="index.html#weather-formats">Weather Formats</a></li>
+                    <li><a href="system-ip-and-urls.html">Systems</a></li>
+                </ul>
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Search..." aria-label="Search">
+                    <button type="button" id="search-button" title="Search"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </nav>
+        <main class="main-content">
+            <section class="content-section">
+                <div class="section-header">
+                    <h2>Satellite Information</h2>
+                </div>
+                <div class="section-content">
+                    <a href="index.html#forecasting" class="back-link"><i class="fa fa-arrow-left"></i> Back to Dashboard</a>
+                    <div class="tool-detail" data-aos="fade-up" data-aos-delay="300">
+                        <div class="tool-header">
+                            <h3>Satellite Information</h3>
+                            <p>Satellite imagery and data for weather monitoring</p>
+                        </div>
+                        <div class="tool-body">
+                            <div class="tool-content">
+                                <div class="tool-description">
+                                    <h4>1. Himawari</h4>
+                                    <p>The Centre shall utilize the Himawari-9 satellite to enhance its weather monitoring and forecasting capabilities. In March 2016, the HimawariCast system was installed at the NCHM under the project titled "The Project for Capacity Development of GLOF and Rainstorm Flood Forecasting and Early Warning in the Kingdom of Bhutan." The Himawari-9 satellite, operated by the Japan Meteorological Agency (JMA), is equipped with the Advanced Himawari Imager (AHI), a 16-channel multispectral imager that captures visible light and infrared images of the Asia-Pacific region. This instrument provides full-disk observations every 10 minutes.</p>
+                                    <p>The Himawari-9 AHI - 16 Spectral Channels which are given below:</p>
+                                    <div class="table-container">
+                                        <table class="data-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Channel</th>
+                                                <th>Wavelength (µm)</th>
+                                                <th>Spectral Type</th>
+                                                <th>Resolution (km)</th>
+                                                <th>Primary Applications</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>1</td><td>0.47</td><td>Visible (Blue)</td><td>1</td><td>Air quality, aerosol monitoring, cloud identification</td></tr>
+                                            <tr><td>2</td><td>0.51</td><td>Visible (Green)</td><td>1</td><td>General cloud detection, true-color imagery</td></tr>
+                                            <tr><td>3</td><td>0.64</td><td>Visible (Red)</td><td>0.5</td><td>High-resolution cloud and surface monitoring</td></tr>
+                                            <tr><td>4</td><td>0.86</td><td>Near-Infrared</td><td>1</td><td>Vegetation analysis, land surface monitoring</td></tr>
+                                            <tr><td>5</td><td>1.37</td><td>Near-Infrared</td><td>2</td><td>High-altitude cirrus cloud detection</td></tr>
+                                            <tr><td>6</td><td>1.6</td><td>Near-Infrared</td><td>2</td><td>Snow and ice detection</td></tr>
+                                            <tr><td>7</td><td>2.3</td><td>Near-Infrared</td><td>2</td><td>Water vapor and cloud particle analysis</td></tr>
+                                            <tr><td>8</td><td>3.9</td><td>Infrared</td><td>2</td><td>Fog detection, nighttime cloud observations</td></tr>
+                                            <tr><td>9</td><td>6.2</td><td>Infrared (Water Vapor)</td><td>2</td><td>Upper troposphere water vapor monitoring</td></tr>
+                                            <tr><td>10</td><td>7.3</td><td>Infrared (Water Vapor)</td><td>2</td><td>Lower atmospheric water vapor detection</td></tr>
+                                            <tr><td>11</td><td>8.6</td><td>Infrared</td><td>2</td><td>Cloud phase detection, volcanic ash monitoring</td></tr>
+                                            <tr><td>12</td><td>9.6</td><td>Infrared (Ozone)</td><td>2</td><td>Ozone layer observation</td></tr>
+                                            <tr><td>13</td><td>10.4</td><td>Infrared (Thermal)</td><td>2</td><td>General cloud temperature and land surface monitoring</td></tr>
+                                            <tr><td>14</td><td>11.2</td><td>Infrared (Thermal)</td><td>2</td><td>Sea surface temperature, cloud classification</td></tr>
+                                            <tr><td>15</td><td>12.4</td><td>Infrared (Thermal)</td><td>2</td><td>Surface and cloud temperature differences</td></tr>
+                                            <tr><td>16</td><td>13.3</td><td>Infrared (CO₂ Absorption)</td><td>2</td><td>Atmospheric temperature profiling</td></tr>
+                                        </tbody>
+                                        </table>
+                                    </div>
+                                    <p>Visible channels (1–3): Provide high-resolution daytime images for cloud and surface monitoring.<br>
+                                    Near-Infrared channels (4–7): Help in vegetation analysis, snow/ice detection, and atmospheric moisture assessment.<br>
+                                    Infrared channels (8–16): Support cloud tracking, severe weather monitoring, water vapor analysis, and temperature measurement.</p>
+                                    <p>There is a link to view the satellite images: <a href="http://172.31.19.17/himawari_viewer.php" target="_blank" rel="noopener noreferrer">Himawari Viewer</a></p>
+                                    <h4>2. INSAT-3D/3DR Satellite</h4>
+                                    <p>INSAT-3D and INSAT-3DR are dedicated meteorological geostationary satellites and located at 82-degree and 74 degree East longitude respectively. INSAT-3D& 3DR carries a multi spectral six channel Imager, 19 channel Sounder, Data Relay Transponder and Search& Rescue Transponder payloads. The Imager payload of INSAT-3D and INSAT-3DR is being used in staggered mode so that effectively 15 minutes temporal resolution is achieved. Sounder payloads of INSAT-3D & INSAT-3DR are used in integrated manner so that INDIAN land region sector data become available on hourly basis and Indian Ocean region data become available on one and half hourly basis either from INSAT-3D or INSAT-3DR satellite.</p>
+                                    <h5>INSAT-3D/3DR-Image</h5>
+                                    <p>The Indian INSAT-3D/3DR-Imager is a multi-spectral capable of generating the images of the earth in six wavelength bands significant for meteorological observations, namely, visible, shortwave infrared, middle infrared, water vapor and two bands in thermal infrared regions. The Imager generates images of the earth disk from geostationary altitude of 36,000 km every 26 minutes and provides information on various parameters, namely, outgoing long-wave radiation, quantitative precipitation estimation, sea surface temperature, snow cover, cloud motion winds, etc. INSAT-3DR provided rapid Scans during severe weather conditions, while INSAT-3D will continue to provide Full frame Mode Scan covering the full globe. The Imager data can be accessed from <a href="https://rapid.imd.gov.in/r2v/" target="_blank" rel="noopener noreferrer">rapid.imd.gov.in/r2v/</a>.</p>
+                                    <div class="table-container">
+                                        <table class="data-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Channel</th>
+                                                <th>Wavelength (µm)</th>
+                                                <th>Spectral Type</th>
+                                                <th>Resolution (km)</th>
+                                                <th>Primary Applications</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>1</td><td>0.55-0.75</td><td>Visible (v)</td><td>1</td><td>Clouds, Surface features</td></tr>
+                                            <tr><td>2</td><td>1.55-1.70</td><td>Shortwave Infrared (SWIR)</td><td>1</td><td>Snow, Ice and water phase in clouds</td></tr>
+                                            <tr><td>3</td><td>3.80-4.00</td><td>Mid-Infrared (MIR)</td><td>4</td><td>Clouds, Fog, Fire</td></tr>
+                                            <tr><td>4</td><td>6.50-7.10</td><td>Water Vapour (WV)</td><td>8</td><td>Upper-Troposphere Moisture</td></tr>
+                                            <tr><td>5</td><td>10.2-11.3</td><td>Thermal Infrared 1 (TIR1)</td><td>4</td><td>Cloud top and surface temperature</td></tr>
+                                            <tr><td>6</td><td>11.5-12.5</td><td>Thermal Infrared 2 (TIR2)</td><td>4</td><td>Lower-Troposphere Moisture</td></tr>
+                                        </tbody>
+                                        </table>
+                                    </div>
+                                    <h5>INSAT-3D/3DR-Sounder</h5>
+                                    <p>INSAT-3D/3DR Sounder has eighteen narrow spectral channels in shortwave infrared, middle infrared and long wave infrared regions and one channel in the visible region. The ground resolution at nadir is nominally 10 × 10 km for all nineteen channels. Atmospheric Sounding System, provides vertical profiles of temperature 40 levels (surface to 70 km), Humidity 21 levels (surface to 15 km) and integrated ozone from surface to top of the atmosphere. The specification of Sounder is as follows.</p>
+                                    <div class="table-container">
+                                        <table class="data-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Channel</th>
+                                                <th>Wavelength (µm)</th>
+                                                <th>Spectral Type</th>
+                                                <th>Resolution (km)</th>
+                                                <th>Primary Applications</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>1</td><td>14.67</td><td>Longwave</td><td>10</td><td>Stratosphere temperature</td></tr>
+                                            <tr><td>2</td><td>14.32</td><td>Longwave</td><td>10</td><td>Tropopause temperature</td></tr>
+                                            <tr><td>3</td><td>14.04</td><td>Longwave</td><td>10</td><td>Upper-level temperature</td></tr>
+                                            <tr><td>4</td><td>13.64</td><td>Longwave</td><td>10</td><td>Mid-level temperature</td></tr>
+                                            <tr><td>5</td><td>13.32</td><td>Longwave</td><td>10</td><td>Low-level temperature</td></tr>
+                                            <tr><td>6</td><td>12.62</td><td>Longwave</td><td>10</td><td>Total precipitable water</td></tr>
+                                            <tr><td>7</td><td>11.99</td><td>Longwave</td><td>10</td><td>Surface temp., moisture</td></tr>
+                                            <tr><td>8</td><td>11.01</td><td>Midwave</td><td>10</td><td>Surface temperature</td></tr>
+                                            <tr><td>9</td><td>9.72</td><td>Midwave</td><td>10</td><td>Total ozone</td></tr>
+                                            <tr><td>10</td><td>7.43</td><td>Midwave</td><td>10</td><td>Upper-level moisture</td></tr>
+                                            <tr><td>11</td><td>7.03</td><td>Midwave</td><td>10</td><td>Mid-level moisture</td></tr>
+                                            <tr><td>12</td><td>6.53</td><td>Midwave</td><td>10</td><td>Upper-level moisture</td></tr>
+                                            <tr><td>13</td><td>4.58</td><td>Shortwave</td><td>10</td><td>Low-level temperature</td></tr>
+                                            <tr><td>14</td><td>4.53</td><td>Shortwave</td><td>10</td><td>Mid-level temperature</td></tr>
+                                            <tr><td>15</td><td>4.46</td><td>Shortwave</td><td>10</td><td>Upper-level temperature</td></tr>
+                                            <tr><td>16</td><td>4.13</td><td>Shortwave</td><td>10</td><td>Boundary-level temp</td></tr>
+                                            <tr><td>17</td><td>3.98</td><td>Shortwave</td><td>10</td><td>Surface temperature</td></tr>
+                                            <tr><td>18</td><td>3.76</td><td>Shortwave</td><td>10</td><td>Surface temp., moisture</td></tr>
+                                            <tr><td>19</td><td>0.695</td><td>Visible</td><td>10</td><td>Cloud</td></tr>
+                                        </tbody>
+                                        </table>
+                                    </div>
+                                    <p>The Sounder data can be accessed from <a href="https://rapid.imd.gov.in/r2v/" target="_blank" rel="noopener noreferrer">rapid.imd.gov.in/r2v/</a>.</p>
+                                    <h5>Surface Lighting Network Data over satellite images</h5>
+                                    <p>The merged product of Indian Meteorological Department (IMD) lightning data and satellite-based cloud with INSAT-3D data product is generated at real-time basis with half an hour animation. The animation, lightning data is divided into the 3 different time categories 10, 20 and 30 minutes in different colours and it is updated every 15-minutes. The lightning network data can be accessed from <a href="https://internal.imd.gov.in/section/satmet/lightning/" target="_blank" rel="noopener noreferrer">internal.imd.gov.in/section/satmet/lightning/</a> and <a href="https://srf.tropmet.res.in/srf/ts_prediction_system/index.php" target="_blank" rel="noopener noreferrer">srf.tropmet.res.in/srf/ts_prediction_system/index.php</a>.</p>
+                                    <h5>Fengyun (FY) Meteorological Satellite</h5>
+                                    <p>The Fengyun series are China's meteorological satellites developed by the China Meteorological Administration (CMA). These satellites are used for weather forecasting, climate monitoring, and disaster warning. The satellite data can be accessed from <a href="https://www.nsmc.org.cn/nsmc/en/home/index.html" target="_blank" rel="noopener noreferrer">nsmc.org.cn/nsmc/en/home/index.html</a> and <a href="http://rsapp.nsmc.org.cn/geofy/?i=-1&isPlay=true&speed=2&sat=fy-4b&pro=geos&type=full_disk&band=27&overlay=&x=-11005.59938144125&y=2992596.6403711336&z=2&area=1&ll=0&county=0&textMarkup=1&duration=12&interval=1&c=false&cp=0.5&st=&et=&ac=&hide=1&s=1" target="_blank" rel="noopener noreferrer">rsapp.nsmc.org.cn/geofy</a>.</p>
+                                    <h4>3. GEO-KOMPSAT Satellite</h4>
+                                    <p>The GEO-KOMPSAT-2A (GK2A) was launched on December 5, 2018, and it allows for diverse observations with 16 channels, compared to the five channels of the former Communication, Ocean and Meteorological Satellite (COMS). Based on this capability, a total of 52 meteorological products have been generated. GK2A is capable of observing the full disk at 10-minute intervals, providing a wealth of information more quickly, making it possible to detect and prepare for severe weather occurrences. Equipped with a high-performance weather sensor (AMI), GK2A contributes to more accurate observations, while also providing high-resolution color images. Furthermore, the independent development of the space meteorological payload has strengthened national capabilities in space meteorological observation. The data can be accessed from <a href="https://nmsc.kma.go.kr/enhome/html/satellite/viewer/selectSatSpeclObs.do" target="_blank" rel="noopener noreferrer">nmsc.kma.go.kr/enhome/html/satellite/viewer</a>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <footer class="footer">
+                <p class="address">Weather Forecasting Section, MSD</p>
+                <p class="email"><i>wfcr@nchm.gov.bt</i></p>
+                <p class="phone">+975-335578 | +975-77452632</p>
+            </footer>
+            <button type="button" id="back-to-top" title="Back to top"><i class="fa fa-arrow-up" aria-hidden="true"></i><span class="sr-only">Back to top</span></button>
+        </main>
+    </div>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, easing: 'ease', once: true });
+        // Back to top button functionality
+        const backToTopButton = document.getElementById('back-to-top');
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html> 

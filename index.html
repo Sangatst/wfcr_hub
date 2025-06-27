@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Climate Guidance</title>
+    <link rel="stylesheet" href="climatedata.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@400;700;900&display=swap">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+      /* Add any additional styles here */
+    </style>
+  </head>
+
+  <body>
+    <div class="page-container">
+      <!-- Header -->
+      <header>
+        <h1>Meteorological Services Division</h1>
+        <h3>Weather Forecasting Section</h3>
+      </header>
+
+      <!-- Navigation Bar -->
+      <nav class="main-nav">
+        <div class="nav-container">
+          <div class="social-container">
+            <a href="https://www.facebook.com/NationalCentreforHydrologyandMeteorology" target="_blank" rel="noopener" class="social-link" title="NCHM Facebook Page"><i class="fa fa-facebook"></i></a>
+          </div>
+          <button type="button" class="menu-toggle" id="menuToggle" title="Toggle Menu">
+            <span class="menu-icon"></span>
+          </button>
+          <ul class="nav-menu">
+            <li><a href="#home" class="home-link active"><i class="fa fa-home"></i> Home</a></li>
+            <li><a href="#forecasting">Forecasting Tools</a></li>
+            <li><a href="#weather-services">Weather Services</a></li>
+            <li><a href="#climate-guidance">Climate Guidance</a></li>
+            <li><a href="#verification">Verification</a></li>
+            <li><a href="#weather-formats">Weather Formats</a></li>
+            <li><a href="#systems" class="systems-link">Systems</a></li>
+          </ul>
+          <div class="search-container">
+            <input type="text" id="search-input" placeholder="Search..." aria-label="Search">
+            <button type="button" id="search-button" title="Search"><i class="fa fa-search"></i></button>
+          </div>
+        </div>
+      </nav>
+
+      <main class="main-content">
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+          <div class="hero-overlay"></div>
+          <div class="hero-content">
+            <h1>Weather Forecasting Tools at Your Fingertips</h1>
+            <p>Access comprehensive weather forecasts, forecasting models, satellite information, and climate guidance for an informed Forecasting</p>
+          </div>
+        </section>
+
+
+
+        <!-- Forecasting Tools Section -->
+        <section id="forecasting" class="content-section" data-aos="fade-up">
+          <div class="section-header">
+            <h2>Forecasting Tools</h2>
+          </div>
+          <div class="section-content">
+            <p>Access our suite of forecasting tools to predict weather patterns and trends.</p>
+            <div class="tools-list">
+              <div class="tool-item" data-aos="fade-right" data-aos-delay="100">
+                <h3>Numerical Weather Prediction Models</h3>
+                <p>Global and regional models for accurate weather forecasting.</p>
+                <a href="nwp-models.html" class="climate-button" role="button">View Details <i class="fa fa-arrow-right"></i></a>
+              </div>
+              <div class="tool-item" data-aos="fade-right" data-aos-delay="200">
+                <h3>Forecasting Links</h3>
+                <p>Access to external weather forecasting resources and websites.</p>
+                <a href="forecasting-links.html" class="climate-button" role="button">View Details <i class="fa fa-arrow-right"></i></a>
+              </div>
+              <div class="tool-item" data-aos="fade-right" data-aos-delay="300">
+                <h3>SmartMet Products</h3>
+                <p>Visualization and editing tools for meteorological data.</p>
+                <a href="smartmet-products.html" class="climate-button" role="button">View Details <i class="fa fa-arrow-right"></i></a>
+              </div>
+              <div class="tool-item" data-aos="fade-right" data-aos-delay="400">
+                <h3>Satellite Information</h3>
+                <p>Satellite imagery and data for weather monitoring.</p>
+                <a href="satellite-information.html" class="climate-button" role="button">View Details <i class="fa fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Weather Services Section -->
+        <section id="weather-services" class="content-section" data-aos="fade-up">
+          <div class="section-header">
+            <h2>Weather Services</h2>
+          </div>
+          <div class="section-content">
+            <p>Explore our comprehensive weather services designed to meet various needs.</p>
+            <div class="services-grid">
+              <div class="service-item" data-aos="zoom-in" data-aos-delay="100">
+                <h3>Time Series 10 Days Forecast</h3>
+                <p>Detailed 10-day weather forecasts with time series data for various locations.</p>
+                <a href="#" class="climate-button" role="button">View Details <i class="fa fa-arrow-right"></i></a>
+              </div>
+              <div class="service-item" data-aos="zoom-in" data-aos-delay="200">
+                <h3>3 Days Map Forecast</h3>
+                <p>Visual weather maps showing forecast conditions for the next 3 days.</p>
+                <a href="#" class="climate-button" role="button">View Details <i class="fa fa-arrow-right"></i></a>
+              </div>
+              <div class="service-item" data-aos="zoom-in" data-aos-delay="300">
+                <h3>Rain Warning Map</h3>
+                <p>Real-time rain warning maps for rainfall conditions across the country.</p>
+                <a href="#" class="climate-button" role="button">View Details <i class="fa fa-arrow-right"></i></a>
+              </div>
+              <div class="service-item" data-aos="zoom-in" data-aos-delay="400">
+                <h3>Wind Warning Maps</h3>
+                <p>Advanced wind warning maps and tools powered by Smartmet technology.</p>
+                <a href="#" class="climate-button" role="button">View Details <i class="fa fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Climate Guidance Section -->
+        <section id="climate-guidance" class="content-section" data-aos="fade-up">
+          <div class="section-header">
+            <h2>Climate Guidance</h2>
+          </div>
+          <div class="section-content">
+            <p>Access temperature and rainfall observation charts for detailed climate analysis.</p>
+
+            <div class="climate-cards">
+              <div class="climate-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>Temperature Observation Charts</h3>
+                <p>View detailed temperature observation charts and analysis.</p>
+                <div class="button-wrapper">
+                  <a href="obs chart/index.html" class="climate-button" role="button">View Charts <i class="fa fa-arrow-right"></i></a>
+                </div>
+              </div>
+
+              <div class="climate-card" data-aos="fade-up" data-aos-delay="200">
+                <h3>Rainfall Observation Charts</h3>
+                <p>View detailed rainfall observation charts and analysis.</p>
+                <div class="button-wrapper">
+                  <a href="obs chart/rainfall_charts.html" class="climate-button" role="button">View Charts <i class="fa fa-arrow-right"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Verification Section -->
+        <section id="verification" class="content-section" data-aos="fade-up">
+          <div class="section-header">
+            <h2>Verification</h2>
+          </div>
+          <div class="section-content">
+            <p>Access verification tools and reports to assess forecast accuracy and performance.</p>
+            <div class="verification-tools">
+              <div class="verification-tool" data-aos="flip-up" data-aos-delay="100">
+                <h3>Forecast Verification</h3>
+                <p>Statistical analysis of forecast accuracy over time.</p>
+                <a href="forecast-verification.html" class="climate-button" role="button">View Details <i class="fa fa-arrow-right"></i></a>
+              </div>
+              <div class="verification-tool" data-aos="flip-up" data-aos-delay="200">
+                <h3>Model Performance</h3>
+                <p>Evaluation of numerical weather prediction model performance.</p>
+                <a href="model-performance.html" class="climate-button" role="button">View Details <i class="fa fa-arrow-right"></i></a>
+              </div>
+              <div class="verification-tool" data-aos="flip-up" data-aos-delay="300">
+                <h3>Verification Reports</h3>
+                <p>Regular reports on forecast verification results.</p>
+                <a href="verification-reports.html" class="climate-button" role="button">View Details <i class="fa fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Weather Formats Section -->
+        <section id="weather-formats" class="content-section">
+          <div class="section-header">
+            <h2>Weather Formats</h2>
+          </div>
+          <div class="section-content">
+            <p>Access standardized formats for weather forecasts and advisories to ensure consistent and clear communication of weather information.</p>
+            <div class="tools-list">
+              <div class="tool-item" data-aos="fade-right">
+                <h3>Standard Formats</h3>
+                <p>Access standard formats for weather data and forecasts.</p>
+                <a href="forecast-request-formats.html" class="climate-button" role="button">View Formats <i class="fa fa-arrow-right"></i></a>
+              </div>
+              <div class="tool-item" data-aos="fade-right" data-aos-delay="100">
+                <h3>Weather Advisories</h3>
+                <p>Formatted templates for weather advisories and warnings, designed to effectively communicate critical weather information to the public.</p>
+                <div class="button-wrapper">
+                  <a href="weather-advisories.html" class="climate-button" role="button">View Advisories</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Systems Section -->
+        <section id="systems" class="content-section" data-aos="fade-up">
+          <div class="section-header">
+            <h2>Systems</h2>
+          </div>
+          <div class="section-content">
+            <p>Access internal and external systems used by NCHM. Click below to view all system IPs and URLs.</p>
+            <a href="system-ip-and-urls.html" class="climate-button" role="button">View System IPs & URLs <i class="fa fa-arrow-right"></i></a>
+          </div>
+        </section>
+
+        <!-- Single Footer for the entire page -->
+        <footer class="footer">
+          <p class="address">Weather Forecasting Section, MSD</p>
+                <p class="email"><i>wfcr@nchm.gov.bt</i></p>
+                <p class="phone">+975-335578 | +975-77452632</p>
+          <div class="admin-link">
+            <a href="admin/login.html" title="Admin Login"><i class="fa fa-lock"></i> Admin</a>
+          </div>
+        </footer>
+
+        <!-- Back to top button -->
+        <button type="button" id="back-to-top" title="Back to top"><i class="fa fa-arrow-up" aria-hidden="true"></i><span class="sr-only">Back to top</span></button>
+
+        <!-- Search Results Modal -->
+        <div id="search-results-modal" class="search-modal">
+          <div class="search-modal-content">
+            <div class="search-modal-header">
+              <h2>Search Results</h2>
+              <button type="button" class="search-close-btn" title="Close">&times;</button>
+            </div>
+            <div class="search-modal-body">
+              <div id="search-results-container"></div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <!-- Configuration and Content Loaders -->
+    <script src="js/site-config.js"></script>
+    <script src="js/config-loader.js"></script>
+    <script src="js/content-loader.js"></script>
+    <!-- Search Functionality -->
+    <script src="js/search.js"></script>
+    <script>
+      // Initialize AOS
+      AOS.init({
+        duration: 800,
+        easing: 'ease',
+        once: true
+      });
+
+      // Smooth scrolling for navigation links (only for hash links)
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          // Only handle hash links (not regular page links)
+          if (this.getAttribute('href').startsWith('#')) {
+            e.preventDefault();
+            console.log('Navigation link clicked:', this.getAttribute('href'));
+
+            // Remove active class from all links
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+              link.classList.remove('active');
+            });
+
+            // Add active class to clicked link
+            this.classList.add('active');
+
+            // Close the mobile menu if it's open
+            document.querySelector('.nav-menu').classList.remove('active');
+            document.getElementById('menuToggle').classList.remove('active');
+
+            // Scroll to the target section with a moderate offset to position titles just below navbar
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+
+            if (targetElement) {
+              console.log('Target element found:', targetId);
+              const navHeight = document.querySelector('.main-nav').offsetHeight;
+              const offset = 10; // Small offset to position titles just below navbar
+
+              // Calculate the position to scroll to
+              const finalPosition = targetElement.offsetTop - navHeight - offset;
+              console.log('Scrolling to position:', finalPosition);
+
+              // Scroll with the calculated offset
+              setTimeout(() => {
+                window.scrollTo({
+                  top: finalPosition,
+                  behavior: 'smooth'
+                });
+              }, 50); // Small delay to ensure DOM updates
+            } else {
+              console.error('Target element not found:', targetId);
+            }
+          }
+        });
+      });
+
+      // Ensure climate buttons work correctly
+      document.querySelectorAll('.climate-button').forEach(button => {
+        console.log('Found climate button:', button.getAttribute('href'));
+
+        // Add a specific click handler to ensure the links work
+        button.addEventListener('click', function(e) {
+          // Prevent default behavior to handle navigation manually
+          e.preventDefault();
+          e.stopPropagation();
+
+          // Get the href attribute
+          const href = this.getAttribute('href');
+          console.log('Climate button clicked, href:', href);
+
+          // Check if it's a climate guidance page (now only the new pages in obs chart folder)
+          const isClimateGuidance = href.includes('obs chart/');
+
+          if (isClimateGuidance) {
+            // For climate guidance pages, navigate directly
+            console.log('Navigating to climate guidance page:', href);
+            window.location.href = href;
+          } else if (href.includes('#')) {
+            // For other pages with hash, use the normal behavior
+            // Split the URL into page and section
+            const [page, section] = href.split('#');
+            console.log('Navigating to page:', page, 'section:', section);
+
+            // Store the section ID in sessionStorage to retrieve it after page load
+            sessionStorage.setItem('scrollToSection', section);
+
+            // Set flag to disable animations for non-climate guidance pages
+            sessionStorage.setItem('noAnimation', 'true');
+
+            // Navigate to the page
+            window.location.href = page;
+          } else {
+            // For links without hash, just navigate normally
+            console.log('Navigating to:', href);
+            window.location.href = href;
+          }
+        });
+      });
+
+      // Toggle navigation menu on mobile
+      document.getElementById('menuToggle').addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        document.querySelector('.nav-menu').classList.toggle('active');
+        this.classList.toggle('active');
+        console.log('Menu toggle clicked, menu active:', document.querySelector('.nav-menu').classList.contains('active'));
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', function(event) {
+        const navMenu = document.querySelector('.nav-menu');
+        const menuToggle = document.getElementById('menuToggle');
+
+        if (navMenu.classList.contains('active') &&
+            !navMenu.contains(event.target) &&
+            !menuToggle.contains(event.target)) {
+            navMenu.classList.remove('active');
+            menuToggle.classList.remove('active');
+        }
+      });
+
+      // Highlight active section on scroll with debounce for better performance
+      function debounce(func, wait = 10, immediate = true) {
+        let timeout;
+        return function() {
+          const context = this, args = arguments;
+          const later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+          };
+          const callNow = immediate && !timeout;
+          clearTimeout(timeout);
+          timeout = setTimeout(later, wait);
+          if (callNow) func.apply(context, args);
+        };
+      }
+
+      const highlightNav = debounce(function() {
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-menu a');
+        const navHeight = document.querySelector('.main-nav').offsetHeight;
+        const offset = 20; // Moderate offset for better detection
+
+        let current = '';
+
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          // Adjusted offset to account for fixed navbar and section padding
+          if (window.scrollY >= (sectionTop - navHeight - offset)) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+          }
+        });
+      }, 10);
+
+      window.addEventListener('scroll', highlightNav);
+
+      // Back to top button functionality
+      const backToTopButton = document.getElementById('back-to-top');
+
+      // Show button when user scrolls down 300px
+      window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+          backToTopButton.classList.add('visible');
+        } else {
+          backToTopButton.classList.remove('visible');
+        }
+      });
+
+      // Scroll to top when button is clicked
+      backToTopButton.addEventListener('click', function() {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+
+      // No custom navigation function needed - using standard HTML links
+    </script>
+  </body>
+</html>

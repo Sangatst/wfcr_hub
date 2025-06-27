@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Performance | NCHM</title>
+    <link rel="stylesheet" href="climatedata.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@400;700;900&display=swap">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+        .verification-chart img {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+        .upload-report-container {
+            margin-bottom: 1rem;
+        }
+        .upload-label {
+            display: inline-block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        #report-upload {
+            margin-right: 1rem;
+        }
+        .delete-report-btn {
+            background: #e74c3c;
+            color: #fff;
+            padding: 4px 12px;
+            font-size: 0.95em;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <header>
+            <h1>Meteorological Services Division</h1>
+            <h3>Weather Forecasting Section</h3>
+        </header>
+        <nav class="main-nav">
+            <div class="nav-container">
+                <div class="social-container">
+                    <a href="https://www.facebook.com/NationalCentreforHydrologyandMeteorology" target="_blank" rel="noopener" class="social-link" title="NCHM Facebook Page"><i class="fa fa-facebook"></i></a>
+                </div>
+                <button type="button" class="menu-toggle" id="menuToggle" title="Toggle Menu">
+                    <span class="menu-icon"></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="home-link"><i class="fa fa-home"></i> Home</a></li>
+                    <li><a href="index.html#forecasting">Forecasting Tools</a></li>
+                    <li><a href="index.html#weather-services">Weather Services</a></li>
+                    <li><a href="index.html#climate-guidance">Climate Guidance</a></li>
+                    <li><a href="index.html#verification" class="active">Verification</a></li>
+                    <li><a href="index.html#documentation">Weather Formats</a></li>
+                    <li><a href="index.html#reports">Systems</a></li>
+                </ul>
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Search..." aria-label="Search">
+                    <button type="button" id="search-button" title="Search"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </nav>
+        <main class="main-content">
+            <section class="content-section">
+                <div class="section-header">
+                    <h2>Model Performance</h2>
+                </div>
+                <div class="section-content">
+                    <a href="index.html#verification" class="back-link"><i class="fa fa-arrow-left"></i> Back to Verification</a>
+                    <div class="verification-detail" data-aos="fade-up" data-aos-delay="100">
+                        <div class="verification-header">
+                            <h3>Model Performance</h3>
+                            <p>Evaluation of numerical weather prediction model performance</p>
+                        </div>
+                        <div class="verification-body">
+                            <div class="verification-content">
+                                <div class="verification-text">
+                                    <p>Numerical Weather Prediction (NWP) models are essential tools for modern weather forecasting. NCHM evaluates the performance of various NWP models, including global and regional models, to identify the most suitable models for forecasting in Bhutan's complex terrain. Model performance evaluation helps us understand model biases, errors, and limitations.</p>
+                                    <p>We assess model performance using a combination of statistical metrics, case studies, and subjective evaluation. The results of model performance evaluation are used to guide model selection, development, and improvement efforts.</p>
+                                    <table class="metrics-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Model</th>
+                                                <th>Strengths</th>
+                                                <th>Limitations</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>WRF</td>
+                                                <td>High resolution, good for complex terrain</td>
+                                                <td>Sensitive to initial conditions</td>
+                                            </tr>
+                                            <tr>
+                                                <td>ECMWF</td>
+                                                <td>Excellent medium-range accuracy</td>
+                                                <td>Lower resolution for local features</td>
+                                            </tr>
+                                            <tr>
+                                                <td>GFS</td>
+                                                <td>Good global coverage, frequent updates</td>
+                                                <td>Less accurate in mountainous regions</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Multi-Model MRWF</td>
+                                                <td>Specialized for Himalayan region</td>
+                                                <td>Limited forecast range</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="verification-chart">
+                                    <img src="assets/S10m_BIAS_202505.png" alt="Model Performance Comparison Chart">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Verification Reports Upload Section -->
+            <section class="content-section">
+                <div class="section-header">
+                    <h2>Verification Reports</h2>
+                </div>
+                <div class="section-content">
+                    <div class="upload-report-container">
+                        <label for="report-upload" class="upload-label">Upload New Report:</label>
+                        <input type="file" id="report-upload" name="report-upload" accept=".pdf,.doc,.docx,.xls,.xlsx,.csv">
+                        <button id="upload-report-btn" class="climate-button">Upload</button>
+                        <span id="upload-status"></span>
+                    </div>
+                    <div id="uploaded-reports-list"></div>
+                </div>
+            </section>
+            <footer class="footer">
+                <p class="address">Weather Forecasting Section, MSD</p>
+                <p class="email"><i>wfcr@nchm.gov.bt</i></p>
+                <p class="phone">+975-335578 | +975-77452632</p>
+            </footer>
+        </main>
+    </div>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, easing: 'ease', once: true });
+        document.getElementById('menuToggle').addEventListener('click', function () {
+            document.querySelector('.nav-menu').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+        // --- Verification Reports Upload & List ---
+        const uploadBtn = document.getElementById('upload-report-btn');
+        const uploadInput = document.getElementById('report-upload');
+        const uploadStatus = document.getElementById('upload-status');
+        const reportsListDiv = document.getElementById('uploaded-reports-list');
+        function formatBytes(bytes) {
+            if (bytes === 0) return '0 B';
+            const k = 1024;
+            const sizes = ['B', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+        function fetchReportsList() {
+            fetch('api/list_verification_reports.php')
+                .then(res => res.json())
+                .then(data => {
+                    if (!data.success) {
+                        reportsListDiv.innerHTML = '<div style="color:red;">Failed to load reports list.</div>';
+                        return;
+                    }
+                    if (!data.reports.length) {
+                        reportsListDiv.innerHTML = '<div style="color:#666;">No reports uploaded yet.</div>';
+                        return;
+                    }
+                    let html = '<table class="metrics-table"><thead><tr><th>File</th><th>Size</th><th>Uploaded</th><th>Action</th></tr></thead><tbody>';
+                    data.reports.forEach(report => {
+                        const downloadUrl = 'data/verification-reports/' + encodeURIComponent(report.filename);
+                        html += `<tr>
+                            <td><a href="${downloadUrl}" target="_blank" rel="noopener">${report.filename}</a></td>
+                            <td>${formatBytes(report.size)}</td>
+                            <td>${report.modified}</td>
+                            <td>
+                                <button class="delete-report-btn climate-button" data-filename="${encodeURIComponent(report.filename)}">Delete</button>
+                            </td>
+                        </tr>`;
+                    });
+                    html += '</tbody></table>';
+                    reportsListDiv.innerHTML = html;
+                    document.querySelectorAll('.delete-report-btn').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            const filename = decodeURIComponent(this.getAttribute('data-filename'));
+                            if (confirm('Are you sure you want to delete this report?')) {
+                                deleteReport(filename);
+                            }
+                        });
+                    });
+                })
+                .catch(() => {
+                    reportsListDiv.innerHTML = '<div style="color:red;">Failed to load reports list.</div>';
+                });
+        }
+        function deleteReport(filename) {
+            uploadStatus.textContent = '';
+            const formData = new FormData();
+            formData.append('filename', filename);
+            fetch('api/delete_verification_report.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    uploadStatus.textContent = 'Report deleted.';
+                    fetchReportsList();
+                } else {
+                    uploadStatus.textContent = data.message || 'Failed to delete report.';
+                }
+            })
+            .catch(() => {
+                uploadStatus.textContent = 'Failed to delete report.';
+            });
+        }
+        uploadBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            uploadStatus.textContent = '';
+            const file = uploadInput.files[0];
+            if (!file) {
+                uploadStatus.textContent = 'Please select a file to upload.';
+                return;
+            }
+            const formData = new FormData();
+            formData.append('report-upload', file);
+            uploadBtn.disabled = true;
+            uploadStatus.textContent = 'Uploading...';
+            fetch('api/upload_verification_report.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                uploadBtn.disabled = false;
+                if (data.success) {
+                    uploadStatus.style.color = '#0066cc';
+                    uploadStatus.textContent = 'Upload successful!';
+                    uploadInput.value = '';
+                    fetchReportsList();
+                } else {
+                    uploadStatus.style.color = 'red';
+                    uploadStatus.textContent = data.message || 'Upload failed.';
+                }
+            })
+            .catch(() => {
+                uploadBtn.disabled = false;
+                uploadStatus.style.color = 'red';
+                uploadStatus.textContent = 'Upload failed.';
+            });
+        });
+        fetchReportsList();
+    </script>
+</body>
+</html> 

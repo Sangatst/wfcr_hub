@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numerical Weather Prediction Models | NCHM</title>
+    <link rel="stylesheet" href="climatedata.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@400;700;900&display=swap">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+        /* Inserted CSS from forecasting-tools.html lines 11-200 */
+        .tool-detail {
+            margin-bottom: 40px;
+            margin-top: 60px;
+            border-radius: var(--border-radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            background-color: var(--background-white);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .tool-detail:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        .tool-header {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 20px 25px;
+            position: relative;
+        }
+        .tool-header h3 {
+            margin: 0;
+            color: var(--text-light);
+            font-size: 1.5rem;
+        }
+        .tool-header p {
+            margin: 10px 0 0;
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+        .tool-body {
+            padding: 25px;
+        }
+        .tool-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: flex-start;
+        }
+        .tool-description {
+            flex: 3;
+            min-width: 300px;
+        }
+        .tool-image {
+            flex: 2;
+            min-width: 250px;
+            border-radius: var(--border-radius-sm);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        .tool-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        .tool-detail:hover .tool-image img {
+            transform: scale(1.03);
+        }
+        .tool-features {
+            margin-top: 20px;
+            background-color: var(--background-light);
+            padding: 15px;
+            border-radius: var(--border-radius-sm);
+            border-left: 3px solid var(--accent-color);
+        }
+        .tool-features h4 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+        .tool-features ul {
+            padding-left: 20px;
+            columns: 2;
+            column-gap: 30px;
+        }
+        .tool-features li {
+            margin-bottom: 8px;
+            break-inside: avoid;
+        }
+        .back-link {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: var(--border-radius-sm);
+            transition: all 0.3s ease;
+        }
+        .back-link:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        .data-table {
+            width: 90%;
+            border-collapse: collapse;
+            margin: 20px auto;
+            font-size: 0.9rem;
+            box-shadow: var(--shadow-sm);
+            border-radius: var(--border-radius-sm);
+            overflow: hidden;
+            background-color: var(--background-white);
+            table-layout: fixed;
+        }
+        .data-table th {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            text-align: left;
+            padding: 12px 15px;
+            font-weight: 600;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            -webkit-hyphens: auto;
+            hyphens: auto;
+            font-size: 0.85rem;
+        }
+        .data-table td {
+            padding: 10px 15px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            vertical-align: top;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            -webkit-hyphens: auto;
+            hyphens: auto;
+        }
+        .data-table tr:nth-child(even) {
+            background-color: var(--background-light);
+        }
+        .data-table tr:hover {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+        .data-table a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .data-table a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+        .data-table th:nth-child(1) { width: 15%; }
+        .data-table th:nth-child(2) { width: 30%; }
+        .data-table th:nth-child(3), .data-table th:nth-child(4) { width: 12%; }
+        .data-table th:nth-child(5) { width: 31%; }
+        .table-container { width: 100%; }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <header>
+            <h1>Meteorological Services Division</h1>
+            <h3>Weather Forecasting Section</h3>
+        </header>
+        <nav class="main-nav">
+            <div class="nav-container">
+                <div class="social-container">
+                    <a href="https://www.facebook.com/NationalCentreforHydrologyandMeteorology" target="_blank" rel="noopener" class="social-link" title="NCHM Facebook Page"><i class="fa fa-facebook"></i></a>
+                </div>
+                <button type="button" class="menu-toggle" id="menuToggle" title="Toggle Menu">
+                    <span class="menu-icon"></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="index.html#home" class="home-link"><i class="fa fa-home"></i> Home</a></li>
+                    <li><a href="index.html#forecasting">Forecasting Tools</a></li>
+                    <li><a href="index.html#weather-services">Weather Services</a></li>
+                    <li><a href="index.html#climate-guidance">Climate Guidance</a></li>
+                    <li><a href="index.html#verification">Verification</a></li>
+                    <li><a href="index.html#weather-formats">Weather Formats</a></li>
+                    <li><a href="system-ip-and-urls.html">Systems</a></li>
+                </ul>
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Search..." aria-label="Search">
+                    <button type="button" id="search-button" title="Search"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </nav>
+        <main class="main-content">
+            <section class="content-section">
+                <div class="section-header">
+                    <h2>Numerical Weather Prediction Models</h2>
+                </div>
+                <div class="section-content">
+                    <a href="index.html#forecasting" class="back-link"><i class="fa fa-arrow-left"></i> Back to Dashboard</a>
+                    <div class="tool-detail" data-aos="fade-up">
+                        <div class="tool-header">
+                            <h3>Numerical Weather Prediction Models</h3>
+                            <p>Global and regional models for accurate weather forecasting</p>
+                        </div>
+                        <div class="tool-body">
+                            <div class="tool-content">
+                                <div class="tool-description">
+                                    <p>Numerical Weather Prediction (NWP) models are the foundation of modern weather forecasting. These models simulate atmospheric conditions using complex numerical equations to predict future weather patterns. NCHM utilizes a range of global and regional NWP models to generate accurate forecasts for Bhutan and the surrounding region.</p>
+                                    <h4>Global Models</h4>
+                                    <p>Global weather models simulate atmospheric conditions worldwide using complex numerical equations. They provide long-range forecasts and are essential for understanding large-scale weather patterns. The platform to access the data at the Centre is given below.</p>
+                                    <div class="table-container">
+                                        <table class="data-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Models</th>
+                                                    <th>Details</th>
+                                                    <th>Resolution (km)</th>
+                                                    <th>Lead time (Days)</th>
+                                                    <th>Data Access/Archival</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>GFS</td>
+                                                    <td>Global Forecast System (GFS): Deterministic Cycle: 00Z, 06Z, 12Z, and 18Z; Grid type: Lat-Lon<br>Developed by the U.S. National Weather Service</td>
+                                                    <td>28 x 28</td>
+                                                    <td>16</td>
+                                                    <td>
+                                                        NCHM SmartMet<br>
+                                                        <a href="https://www.windy.com/" target="_blank" rel="noopener noreferrer">windy.com</a><br>
+                                                        <a href="https://www.meteoblue.com/en/weather/week" target="_blank" rel="noopener noreferrer">meteoblue.com</a><br>
+                                                        <a href="https://www.tropicaltidbits.com/analysis/models/" target="_blank" rel="noopener noreferrer">tropicaltidbits.com</a><br>
+                                                        <a href="https://nomads.ncep.noaa.gov/pub/data/nccf/com/gfs/prod/" target="_blank" rel="noopener noreferrer">nomads.ncep.noaa.gov</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>GEFS</td>
+                                                    <td>Global Ensemble Forecast System: Probabilistic Ensemble, NOAA<br>Cycle: 00Z, 06Z, 12Z, and 18Z. Pressure Level: 64, Grid type: Icosahedral</td>
+                                                    <td>28 x 28</td>
+                                                    <td>16</td>
+                                                    <td>
+                                                        <a href="https://www.tropicaltidbits.com/analysis/models/" target="_blank" rel="noopener noreferrer">tropicaltidbits.com</a><br>
+                                                        <a href="https://srf.tropmet.res.in/srf/hires_gefs/index.php" target="_blank" rel="noopener noreferrer">srf.tropmet.res.in</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>ECMWF (IFS)</td>
+                                                    <td>European Centre for Medium-Range Weather Forecasts Integrated Forecasting System (IFS): HRES Set-I Deterministic<br>Cycle: 00Z, and 12Z; Pressure Level: 13; Grid type: Lat-Lon</td>
+                                                    <td>28 x 28/ 9 x 9</td>
+                                                    <td>10</td>
+                                                    <td>
+                                                        NCHM SmartMet<br>
+                                                        <a href="https://www.windy.com/" target="_blank" rel="noopener noreferrer">windy.com</a><br>
+                                                        <a href="https://www.meteoblue.com/en/weather/week" target="_blank" rel="noopener noreferrer">meteoblue.com</a><br>
+                                                        <a href="https://www.tropicaltidbits.com/analysis/models/" target="_blank" rel="noopener noreferrer">tropicaltidbits.com</a><br>
+                                                        <a href="https://charts.ecmwf.int/" target="_blank" rel="noopener noreferrer">charts.ecmwf.int</a><br>
+                                                        <a href="https://data.ecmwf.int/forecasts/" target="_blank" rel="noopener noreferrer">data.ecmwf.int</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>ICON</td>
+                                                    <td>Icosahedral Non-Hydrostatic Model: Deterministic Cycle: 00Z, 06Z, 12Z, and 18Z; Model Level: 90; Grid type: Icosahedral</td>
+                                                    <td>13 x 13</td>
+                                                    <td>7.5</td>
+                                                    <td>
+                                                        NCHM SmartMet<br>
+                                                        <a href="https://www.windy.com/" target="_blank" rel="noopener noreferrer">windy.com</a><br>
+                                                        <a href="https://www.meteoblue.com/en/weather/week" target="_blank" rel="noopener noreferrer">meteoblue.com</a><br>
+                                                        <a href="https://www.tropicaltidbits.com/analysis/models/" target="_blank" rel="noopener noreferrer">tropicaltidbits.com</a><br>
+                                                        <a href="https://opendata.dwd.de/weather/" target="_blank" rel="noopener noreferrer">opendata.dwd.de</a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <h4>Regional Models</h4>
+                                    <p>Regional weather models focus on smaller geographic areas with higher resolution and shorter forecast ranges. They provide more detailed predictions for temperature, precipitation, wind, and severe weather.</p>
+                                    <div class="table-container">
+                                        <table class="data-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Models</th>
+                                                    <th>Details</th>
+                                                    <th>Resolution (km)</th>
+                                                    <th>Lead time (Days)</th>
+                                                    <th>Data Access/Archival</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>NCMRWF</td>
+                                                    <td>National Centre for Medium Range Weather Forecasting NCMRWF regional unified model (NCUM): Deterministic Cycle: 00Z, and 12Z; Model Level: 70; Grid type: Lat-Lon</td>
+                                                    <td>12 x 12</td>
+                                                    <td>10</td>
+                                                    <td>
+                                                        <a href="https://www.ncmrwf.gov.in/" target="_blank" rel="noopener noreferrer">ncmrwf.gov.in</a><br>
+                                                        bhutan@ftp.ncmrwf.gov.in, Password: ncmbhutan@2020<br>
+                                                        SAFFGS: <a href="https://103.215.208.77/SASIAFFG_CONSOLE/index.php?region=0" target="_blank" rel="noopener noreferrer">103.215.208.77/SASIAFFG_CONSOLE</a>, username: btn, password: ffgs:20:bTn:18
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>IMD-GFS</td>
+                                                    <td>Deterministic Cycle: 00Z, 06Z, 12Z, and 18Z; Grid type: Lat-Lon</td>
+                                                    <td>12 × 12</td>
+                                                    <td>10</td>
+                                                    <td>
+                                                        <a href="https://nwp.imd.gov.in/" target="_blank" rel="noopener noreferrer">nwp.imd.gov.in</a><br>
+                                                        <a href="https://mausam.imd.gov.in/" target="_blank" rel="noopener noreferrer">mausam.imd.gov.in</a><br>
+                                                        Global IP: sftp.nwp.imd.gov.in, USER: ncmh_bhutan, P/W: 6%E8yFU93jSo<br>
+                                                        <a href="https://rsmcnewdelhi.imd.gov.in/" target="_blank" rel="noopener noreferrer">rsmcnewdelhi.imd.gov.in</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>IMD-WRF</td>
+                                                    <td>Deterministic Cycle: 00Z, 06Z, 12Z, and 18Z; Grid type: Lat-Lon</td>
+                                                    <td>3 × 3</td>
+                                                    <td>3</td>
+                                                    <td>
+                                                        <a href="https://nwp.imd.gov.in/" target="_blank" rel="noopener noreferrer">nwp.imd.gov.in</a><br>
+                                                        <a href="https://mausam.imd.gov.in/" target="_blank" rel="noopener noreferrer">mausam.imd.gov.in</a><br>
+                                                        Global IP: sftp.nwp.imd.gov.in, USER: ncmh_bhutan, P/W: 6%E8yFU93jSo<br>
+                                                        <a href="https://rsmcnewdelhi.imd.gov.in/" target="_blank" rel="noopener noreferrer">rsmcnewdelhi.imd.gov.in</a><br>
+                                                        SAFFGS: <a href="https://103.215.208.77/SASIAFFG_CONSOLE/index.php?region=0" target="_blank" rel="noopener noreferrer">103.215.208.77/SASIAFFG_CONSOLE</a>, username: btn, password: ffgs:20:bTn:18
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>UEMSWRF</td>
+                                                    <td>Deterministic Cycle: 00Z, 06Z, 12Z, and 18Z; Grid type: Lat-Lon</td>
+                                                    <td>3 × 3</td>
+                                                    <td>10</td>
+                                                    <td>NCHM WRF: <a href="http://172.31.17.175/" target="_blank" rel="noopener noreferrer">172.31.17.175</a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <h4>Weather Research and Forecasting Model (WRF)</h4>
+                                    <p>WRF is a Local Area Model that is used for downscaling the weather forecast information to a finer grid using the boundary condition from the Global Model with coarser grid information. The Model at the Center is set up in two domains: inner (3 km resolution) and outer (15 km resolution) domain. There are two running versions of WRF: WRF 3.4.1 and WRF 4.3.1.</p>
+                                    <div class="table-container">
+                                        <table class="data-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Models</th>
+                                                    <th>Details</th>
+                                                    <th>Resolution (km)</th>
+                                                    <th>Lead time (Days)</th>
+                                                    <th>Data Access/Archival</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>UEMSWRF</td>
+                                                    <td>Deterministic Cycle: 00Z, 06Z, 12Z, and 18Z; Grid type: Lat-Lon</td>
+                                                    <td>3 × 3</td>
+                                                    <td>10</td>
+                                                    <td>NCHM WRF: <a href="http://172.31.17.175/" target="_blank" rel="noopener noreferrer">172.31.17.175</a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <p>Figure 4.1: WRF: inner domain (left), outer domain (right)</p>
+                                    <h4>Forecast Guidance</h4>
+                                    <p>NWP model products like WRF are fundamental materials for weather forecasting but have systematic errors caused by differences between actual and NWP model topography and caused by approximation in the physical process of NWP. The guidance produced from NWP and observation data with statistical interpretation is a useful prediction to reduce errors in NWP model output. The NAS server at NCHM contains guidance products that use observation data and two models; WRF and GSM. The statistical methods used are multiple linear regression (MLR) for precipitation guidance and Kalman filter (KF) for temperature guidance.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <footer class="footer">
+                <p class="address">Weather Forecasting Section, MSD</p>
+                <p class="email"><i>wfcr@nchm.gov.bt</i></p>
+                <p class="phone">+975-335578 | +975-77452632</p>
+            </footer>
+            <button type="button" id="back-to-top" title="Back to top"><i class="fa fa-arrow-up" aria-hidden="true"></i><span class="sr-only">Back to top</span></button>
+        </main>
+    </div>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, easing: 'ease', once: true });
+        // Back to top button functionality
+        const backToTopButton = document.getElementById('back-to-top');
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html> 

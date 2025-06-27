@@ -1,0 +1,25 @@
+{
+  "reports": [
+    {
+      "title": "Daily Weather Reports",
+      "description": "Summary of daily weather conditions.",
+      "frequency": "Daily (5:00 PM)",
+      "format": "PDF, HTML",
+      "coverage": "All districts"
+    },
+    {
+      "title": "Monthly Climate Summaries",
+      "description": "Overview of monthly climate conditions and anomalies.",
+      "frequency": "Monthly (5th day)",
+      "format": "PDF, Excel",
+      "coverage": "National, Regional"
+    },
+    {
+      "title": "Annual Climate Reports",
+      "description": "Comprehensive analysis of annual climate conditions.",
+      "frequency": "Yearly (February)",
+      "format": "PDF, Print",
+      "coverage": "National"
+    }
+  ]
+}

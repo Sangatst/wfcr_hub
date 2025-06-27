@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Advisories - NCHM</title>
+    <link rel="stylesheet" href="climatedata.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@400;700;900&display=swap">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
+<body>
+    <div class="page-container">
+        <!-- Header -->
+        <header>
+            <h1>Meteorological Services Division</h1>
+            <h3>Weather Forecasting Section</h3>
+        </header>
+
+        <!-- Navigation Bar -->
+        <nav class="main-nav">
+            <div class="nav-container">
+                <div class="social-container">
+                    <a href="https://www.facebook.com/NationalCentreforHydrologyandMeteorology" target="_blank" rel="noopener" class="social-link" title="NCHM Facebook Page"><i class="fa fa-facebook"></i></a>
+                </div>
+                <button type="button" class="menu-toggle" id="menuToggle" title="Toggle Menu">
+                    <span class="menu-icon"></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="index.html#home" class="home-link"><i class="fa fa-home"></i> Home</a></li>
+                    <li><a href="index.html#forecasting">Forecasting Tools</a></li>
+                    <li><a href="index.html#weather-services">Weather Services</a></li>
+                    <li><a href="index.html#climate-guidance">Climate Guidance</a></li>
+                    <li><a href="index.html#verification">Verification</a></li>
+                    <li><a href="index.html#weather-formats">Weather Formats</a></li>
+                    <li><a href="system-ip-and-urls.html">Systems</a></li>
+                </ul>
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Search..." aria-label="Search">
+                    <button type="button" id="search-button" title="Search"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <!-- Back Button -->
+            <div class="container">
+                <a href="index.html#weather-formats" class="back-link"><i class="fa fa-arrow-left"></i> Back to Weather Formats</a>
+            </div>
+
+            <!-- Weather Advisories Section -->
+            <section class="content-section">
+                <div class="section-header">
+                    <h2>Weather Advisories</h2>
+                </div>
+                <div class="section-content">
+                    <p>Access standardized formats for weather advisories and warnings.</p>
+                    <div class="alert-message">
+                        <p><i class="fa fa-info-circle"></i> Note: To view these documents, please ensure they are published to the web in Google Docs.</p>
+                    </div>
+                    
+                    <div class="advisory-grid">
+                        <!-- Weather Remark -->
+                        <div class="advisory-item" data-aos="fade-up">
+                            <h3>Weather Remark</h3>
+                            <div class="google-doc-container">
+                                <iframe src="https://docs.google.com/gview?url=https://docs.google.com/document/d/1Eo0zEzNskbhXpdOzcrAZvF41KSyN0JeJA5fNxH3lnMs/export?format=pdf&embedded=true" frameborder="0" title="Weather Remark PDF"></iframe>
+                            </div>
+                            <div class="button-wrapper">
+                                <a href="https://docs.google.com/document/d/1Eo0zEzNskbhXpdOzcrAZvF41KSyN0JeJA5fNxH3lnMs/edit" target="_blank" rel="noopener" class="climate-button" role="button">Edit in Google Docs <i class="fa fa-external-link"></i></a>
+                            </div>
+                        </div>
+
+                        <!-- Weather Advisory -->
+                        <div class="advisory-item" data-aos="fade-up" data-aos-delay="100">
+                            <h3>Weather Advisory</h3>
+                            <div class="google-doc-container">
+                                <iframe src="https://docs.google.com/gview?url=https://docs.google.com/document/d/1SgHXIoxwND9mkcEHE712VM2XQWvPhgBE1dBVJXbcH7o/export?format=pdf&embedded=true" frameborder="0" title="Weather Advisory PDF"></iframe>
+                            </div>
+                            <div class="button-wrapper">
+                                <a href="https://docs.google.com/document/d/1SgHXIoxwND9mkcEHE712VM2XQWvPhgBE1dBVJXbcH7o/edit" target="_blank" rel="noopener" class="climate-button" role="button">Edit in Google Docs <i class="fa fa-external-link"></i></a>
+                            </div>
+                        </div>
+
+                        <!-- Weather Warning -->
+                        <div class="advisory-item" data-aos="fade-up" data-aos-delay="200">
+                            <h3>Weather Warning</h3>
+                            <div class="google-doc-container">
+                                <iframe src="https://docs.google.com/gview?url=https://docs.google.com/document/d/1-gETCON-avY_6LS-TsxYHDG9EQBfxjS2wcizYGlkhao/export?format=pdf&embedded=true" frameborder="0" title="Weather Warning PDF"></iframe>
+                            </div>
+                            <div class="button-wrapper">
+                                <a href="https://docs.google.com/document/d/1-gETCON-avY_6LS-TsxYHDG9EQBfxjS2wcizYGlkhao/edit" target="_blank" rel="noopener" class="climate-button" role="button">Edit in Google Docs <i class="fa fa-external-link"></i></a>
+                            </div>
+                        </div>
+
+                        <!-- Updates -->
+                        <div class="advisory-item" data-aos="fade-up" data-aos-delay="300">
+                            <h3>Updates on Advisories</h3>
+                            <div class="google-doc-container">
+                                <iframe src="https://docs.google.com/gview?url=https://docs.google.com/document/d/1dzWIY_xplQ1yZHB8HOygvwvaVTCE_kBp-nIpUYaX2zQ/export?format=pdf&embedded=true" frameborder="0" title="Updates on Advisories PDF"></iframe>
+                            </div>
+                            <div class="button-wrapper">
+                                <a href="https://docs.google.com/document/d/1dzWIY_xplQ1yZHB8HOygvwvaVTCE_kBp-nIpUYaX2zQ/edit" target="_blank" rel="noopener" class="climate-button" role="button">Edit in Google Docs <i class="fa fa-external-link"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <p class="address">Weather Forecasting Section, MSD</p>
+                <p class="email"><i>wfcr@nchm.gov.bt</i></p>
+                <p class="phone">+975-335578 | +975-77452632</p>
+                <div class="admin-link">
+                    <a href="admin/login.html" title="Admin Login"><i class="fa fa-lock"></i> Admin</a>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease',
+            once: true
+        });
+
+        // Toggle navigation menu on mobile
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.querySelector('.nav-menu').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+    </script>
+</body>
+</html> 

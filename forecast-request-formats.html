@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forecast Request Formats - NCHM</title>
+    <link rel="stylesheet" href="climatedata.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@400;700;900&display=swap">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script src="https://cdn.jsdelivr.net/npm/dom-to-image-more@2.9.0/dist/dom-to-image-more.min.js"></script>
+</head>
+
+<body>
+    <div class="page-container">
+        <!-- Header -->
+        <header>
+            <h1>Meteorological Services Division</h1>
+            <h3>Weather Forecasting Section</h3>
+        </header>
+
+        <!-- Navigation Bar -->
+        <nav class="main-nav">
+            <div class="nav-container">
+                <div class="social-container">
+                    <a href="https://www.facebook.com/NationalCentreforHydrologyandMeteorology" target="_blank"
+                        rel="noopener" class="social-link" title="NCHM Facebook Page"><i class="fa fa-facebook"></i></a>
+                </div>
+                <button type="button" class="menu-toggle" id="menuToggle" title="Toggle Menu">
+                    <span class="menu-icon"></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="index.html#home" class="home-link"><i class="fa fa-home"></i> Home</a></li>
+                    <li><a href="index.html#forecasting">Forecasting Tools</a></li>
+                    <li><a href="index.html#weather-services">Weather Services</a></li>
+                    <li><a href="index.html#climate-guidance">Climate Guidance</a></li>
+                    <li><a href="index.html#verification">Verification</a></li>
+                    <li><a href="index.html#weather-formats">Weather Formats</a></li>
+                    <li><a href="system-ip-and-urls.html">Systems</a></li>
+                </ul>
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Search..." aria-label="Search">
+                    <button type="button" id="search-button" title="Search"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <!-- Back Button -->
+            <div class="container">
+                <a href="index.html#weather-formats" class="back-link"><i class="fa fa-arrow-left"></i> Back to Weather
+                    Formats</a>
+            </div>
+
+            <!-- Forecast Request Formats Section -->
+            <section class="content-section">
+                <div class="section-header">
+                    <h2>Forecast Request Formats</h2>
+                </div>
+                <div class="section-content">
+                    <p>Here are the standard formats for weather forecast requests.</p>
+
+                    <div class="controls-container">
+                        <div class="select-container">
+                            <label for="days-select">Select Days:</label>
+                            <select id="days-select">
+                                <option value="1">1 Day</option>
+                                <option value="2">2 Days</option>
+                                <option value="3" selected>3 Days</option>
+                                <option value="4">4 Days</option>
+                                <option value="5">5 Days</option>
+                                <option value="6">6 Days</option>
+                                <option value="7">7 Days</option>
+                                <option value="8">8 Days</option>
+                                <option value="9">9 Days</option>
+                                <option value="10">10 Days</option>
+                            </select>
+                        </div>
+                        <div class="select-container">
+                            <label for="location-select">Select Location:</label>
+                            <select id="location-select">
+                                <!-- Options will be populated by JavaScript -->
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="button-container">
+                        <!-- Remove PDF button -->
+                        <!-- Add PNG buttons under each table -->
+                    </div>
+
+                    <div class="loading-indicator hide">Loading...</div>
+
+                    <!-- 3-Day Detailed Table -->
+                    <div class="forecast-table-container" id="detailed-table-container">
+                        <table id="forecast-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Morning (09:00)</th>
+                                    <th>Afternoon (15:00)</th>
+                                    <th>Evening (21:00)</th>
+                                    <th>Temperature (°C)</th>
+                                    <th>Rainfall (mm)</th>
+                                    <th>Wind</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Data will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                        <button id="download-detailed-png-btn" class="climate-button download-png-btn">Download 3-Day Table as PNG</button>
+                    </div>
+
+                    <!-- 4-10 Day Simple Table -->
+                    <div class="forecast-table-container hide" id="simple-table-container">
+                        <table id="simple-forecast-table">
+                            <thead>
+                                <tr>
+                                    <th>DATE</th>
+                                    <th>TEMPERATURE (°C)</th>
+                                    <th>RAINFALL (mm)</th>
+                                    <th>WIND</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Data will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                        <button id="download-simple-png-btn" class="climate-button download-png-btn">Download 4+ Days Table as PNG</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <p class="address">Weather Forecasting Section, MSD</p>
+                <p class="email"><i>wfcr@nchm.gov.bt</i></p>
+                <p class="phone">+975-335578 | +975-77452632</p>
+                <div class="admin-link">
+                    <a href="admin/login.html" title="Admin Login"><i class="fa fa-lock"></i> Admin</a>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+    <!-- Libraries for PDF and PNG download -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dom-to-image-more@2.9.0/dist/dom-to-image-more.min.js"></script>
+
+    <!-- Move main JS logic to here -->
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease',
+            once: true
+        });
+
+        // Toggle navigation menu on mobile
+        document.getElementById('menuToggle').addEventListener('click', function () {
+            document.querySelector('.nav-menu').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        // --- Forecast Data and Functionality ---
+        const API_BASE_URL = 'http://202.144.145.99:8080/timeseries';
+        const locations = {
+            // Northern Bhutan
+            'Gasa': { latitude: 28.0000, longitude: 89.7333 },
+
+            // Western Bhutan
+            'Thimphu': { latitude: 27.4660892, longitude: 89.6419067 },
+            'Paro': { latitude: 27.4294, longitude: 89.4171 },
+            'Haa': { latitude: 27.3875, longitude: 89.2807 },
+            'Punakha': { latitude: 27.5833, longitude: 89.8667 },
+            'Wangdue Phodrang': { latitude: 27.4867, longitude: 89.8990 },
+
+            // Southern Bhutan
+            'Phuentsholing': { latitude: 26.8516, longitude: 89.3896 },
+            'Tsirang': { latitude: 26.9000, longitude: 90.4833 },
+            'Samdrup Jongkhar': { latitude: 26.8000, longitude: 91.5000 },
+            'Samtse': { latitude: 26.9000, longitude: 89.1000 },
+            'Sarpang': { latitude: 26.8667, longitude: 90.2667 },
+            'Dagana': { latitude: 27.0833, longitude: 89.8833 },
+
+            // Central Bhutan
+            'Trongsa': { latitude: 27.5000, longitude: 90.5000 },
+            'Bumthang': { latitude: 27.5000, longitude: 90.7333 },
+            'Zhemgang': { latitude: 27.2167, longitude: 90.6667 },
+
+            // Eastern Bhutan
+            'Mongar': { latitude: 27.2667, longitude: 91.2333 },
+            'Trashigang': { latitude: 27.3333, longitude: 91.5667 },
+            'Lhuentse': { latitude: 27.6667, longitude: 91.1833 },
+            'Trashiyangtse': { latitude: 27.6000, longitude: 91.5000 },
+            'Pemagatshel': { latitude: 27.0333, longitude: 91.4000 },
+        };
+
+        const daysSelect = document.getElementById('days-select');
+        const locationSelect = document.getElementById('location-select');
+        const forecastTableBody = document.getElementById('forecast-table').querySelector('tbody');
+        const simpleTableBody = document.getElementById('simple-forecast-table').querySelector('tbody');
+        const detailedTableContainer = document.getElementById('detailed-table-container');
+        const simpleTableContainer = document.getElementById('simple-table-container');
+        const loadingIndicator = document.querySelector('.loading-indicator');
+
+        // Populate locations dropdown
+        function populateLocationsDropdown() {
+            for (const location in locations) {
+                const option = document.createElement('option');
+                option.value = location;
+                option.textContent = location;
+                locationSelect.appendChild(option);
+            }
+            // Select Thimphu by default
+            locationSelect.value = 'Thimphu';
+        }
+
+        // Helper to get an array of date strings for the full range
+        function getDateRangeStrings(startDate, numDays) {
+            const dates = [];
+            for (let i = 0; i < numDays; i++) {
+                const d = new Date(startDate);
+                d.setDate(startDate.getDate() + i);
+                dates.push(d.toDateString());
+            }
+            return dates;
+        }
+
+        // Fetch forecast data from API
+        async function fetchForecast() {
+            const days = parseInt(daysSelect.value);
+            const selectedLocation = locationSelect.value;
+            const { latitude, longitude } = locations[selectedLocation];
+            const coordinates = `${latitude},${longitude}`;
+
+            // Calculate start and end dates (tomorrow to tomorrow + days)
+            const startDate = new Date();
+            startDate.setDate(startDate.getDate() + 1); // Start from tomorrow
+            startDate.setHours(0, 0, 0, 0); // Set to beginning of the day
+
+            const formatDate = (date) => {
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                const hours = String(date.getHours()).padStart(2, '0');
+                const minutes = String(date.getMinutes()).padStart(2, '0');
+                const seconds = String(date.getSeconds()).padStart(2, '0');
+                return `${year}${month}${day}T${hours}${minutes}${seconds}`;
+            };
+
+            const startDateStr = formatDate(startDate);
+            // For the end date, we need to go to the end of the selected day
+            const endDateForApi = new Date(startDate);
+            endDateForApi.setDate(startDate.getDate() + days - 1); // Subtract 1 to include the last day
+            endDateForApi.setHours(23, 59, 59, 999); // Set to end of the day
+
+            const endDateStr = formatDate(endDateForApi);
+
+            const url = `${API_BASE_URL}?producer=meteor_edit&param=Time,Temperature,Precipitation1h,latlon,WindSpeedMS,WindDirection,smartsymbol&starttime=${startDateStr}&endtime=${endDateStr}&latlon=${coordinates}&format=json`;
+
+            console.log("Fetching data from URL:", url);
+
+            loadingIndicator.style.display = 'block';
+            forecastTableBody.innerHTML = '';
+            simpleTableBody.innerHTML = '';
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                console.log("API Response:", data);
+                const tomorrow = new Date();
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                tomorrow.setHours(0, 0, 0, 0);
+                const allDateStrings = getDateRangeStrings(tomorrow, days);
+                if (days <= 3) {
+                    detailedTableContainer.style.display = '';
+                    simpleTableContainer.style.display = 'none';
+                    await populateTable(data, days, 1, allDateStrings); // pass allDateStrings
+                } else {
+                    detailedTableContainer.style.display = '';
+                    simpleTableContainer.style.display = '';
+                    await populateTable(data, 3, 1, allDateStrings.slice(0, 3));
+                    populateSimpleTable(data, days, 4, allDateStrings.slice(3));
+                }
+            } catch (error) {
+                console.error("Fetching weather data failed:", error);
+                forecastTableBody.innerHTML = `<tr><td colspan="7">Error loading forecast data. Please try again.</td></tr>`;
+                simpleTableBody.innerHTML = `<tr><td colspan="4">Error loading forecast data. Please try again.</td></tr>`;
+            } finally {
+                loadingIndicator.style.display = 'none';
+            }
+        }
+
+        // Populate the forecast table with data (detailed, for up to 3 days)
+        async function populateTable(data, days, startDayIdx, allDateStrings) {
+            forecastTableBody.innerHTML = '';
+            if (!data) data = [];
+            function parseApiDate(apiDateString) {
+                try {
+                    const year = parseInt(apiDateString.substring(0, 4));
+                    const month = parseInt(apiDateString.substring(4, 6)) - 1;
+                    const day = parseInt(apiDateString.substring(6, 8));
+                    const hours = parseInt(apiDateString.substring(9, 11));
+                    const minutes = parseInt(apiDateString.substring(11, 13));
+                    const seconds = parseInt(apiDateString.substring(13, 15));
+                    return new Date(year, month, day, hours, minutes, seconds);
+                } catch (error) {
+                    return new Date('Invalid Date');
+                }
+            }
+            const dailyData = {};
+            data.forEach(item => {
+                const date = parseApiDate(item.Time);
+                if (isNaN(date.getTime())) return;
+                const dateKey = date.toDateString();
+                const hour = date.getHours();
+                if (!dailyData[dateKey]) {
+                    dailyData[dateKey] = {
+                        morning: null,  // 09:00
+                        afternoon: null, // 15:00
+                        evening: null,  // 21:00
+                        temps: [],
+                        precipitation: [],
+                        windSpeeds: []
+                    };
+                }
+                if (hour === 9) {
+                    dailyData[dateKey].morning = { time: date, ...item };
+                } else if (hour === 15) {
+                    dailyData[dateKey].afternoon = { time: date, ...item };
+                } else if (hour === 21) {
+                    dailyData[dateKey].evening = { time: date, ...item };
+                }
+                if (item.Temperature !== undefined) dailyData[dateKey].temps.push(item.Temperature);
+                if (item.Precipitation1h !== undefined) dailyData[dateKey].precipitation.push(item.Precipitation1h);
+                if (item.WindSpeedMS !== undefined) dailyData[dateKey].windSpeeds.push(item.WindSpeedMS);
+            });
+            for (let i = 0; i < allDateStrings.length; i++) {
+                const dateKey = allDateStrings[i];
+                const row = forecastTableBody.insertRow();
+                const dateCell = row.insertCell(0);
+                const morningCell = row.insertCell(1);
+                const afternoonCell = row.insertCell(2);
+                const eveningCell = row.insertCell(3);
+                const tempCell = row.insertCell(4);
+                const rainCell = row.insertCell(5);
+                const windCell = row.insertCell(6);
+                const daily = dailyData[dateKey];
+                const date = new Date(dateKey);
+                dateCell.textContent = date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+                async function populateTimeCell(cell, periodData) {
+                    if (periodData && periodData.smartsymbol !== undefined && periodData.smartsymbol !== null) {
+                        const symbolCode = periodData.smartsymbol;
+                        const img = document.createElement('img');
+                        img.className = 'weather-icon';
+                        img.alt = '';
+                        img.style.width = '40px';
+                        img.style.height = '40px';
+                        cell.innerHTML = '';
+                        cell.appendChild(img);
+                        const dayIconPath = `smartsymbol/day/${symbolCode}.svg`;
+                        const nightIconPath = `smartsymbol/night/${symbolCode}.svg`;
+                        await new Promise(resolve => {
+                            let triedNight = false;
+                            const loadImage = (path) => {
+                                img.onload = () => { resolve(); };
+                                img.onerror = () => {
+                                    if (!triedNight && path === dayIconPath) {
+                                        triedNight = true;
+                                        loadImage(nightIconPath);
+                                    } else {
+                                        cell.innerHTML = 'N/A';
+                                        resolve();
+                                    }
+                                };
+                                img.src = path;
+                            };
+                            loadImage(dayIconPath);
+                        });
+                    } else {
+                        cell.textContent = 'N/A';
+                    }
+                }
+                if (daily) {
+                    await populateTimeCell(morningCell, daily.morning);
+                    await populateTimeCell(afternoonCell, daily.afternoon);
+                    await populateTimeCell(eveningCell, daily.evening);
+                    const minTemp = daily.temps.length > 0 ? Math.min(...daily.temps.filter(t => t !== 'N/A')) : 'N/A';
+                    const maxTemp = daily.temps.length > 0 ? Math.max(...daily.temps.filter(t => t !== 'N/A')) : 'N/A';
+                    if (minTemp !== 'N/A' && maxTemp !== 'N/A') {
+                        tempCell.innerHTML = `<span class="min-temp">${minTemp}°C</span> - <span class="max-temp">${maxTemp}°C</span>`;
+                    } else {
+                        tempCell.textContent = 'N/A';
+                    }
+                    const totalRain = daily.precipitation.reduce((sum, p) => sum + (p || 0), 0);
+                    rainCell.textContent = totalRain > 0 ? `${totalRain.toFixed(1)} mm` : '0 mm';
+                    const minWind = daily.windSpeeds.length > 0 ? Math.min(...daily.windSpeeds.filter(w => w !== 'N/A')) : 'N/A';
+                    const maxWind = daily.windSpeeds.length > 0 ? Math.max(...daily.windSpeeds.filter(w => w !== 'N/A')) : 'N/A';
+                    if (minWind !== 'N/A' && maxWind !== 'N/A') {
+                        windCell.textContent = `${minWind.toFixed(1)} - ${maxWind.toFixed(1)} m/s`;
+                    } else {
+                        windCell.textContent = 'N/A';
+                    }
+                } else {
+                    morningCell.textContent = 'N/A';
+                    afternoonCell.textContent = 'N/A';
+                    eveningCell.textContent = 'N/A';
+                    tempCell.textContent = 'N/A';
+                    rainCell.textContent = 'N/A';
+                    windCell.textContent = 'N/A';
+                }
+            }
+        }
+
+        // Populate the simple table for days 4+
+        function populateSimpleTable(data, days, startDayIdx, allDateStrings) {
+            simpleTableBody.innerHTML = '';
+            if (!data) data = [];
+            function parseApiDate(apiDateString) {
+                try {
+                    const year = parseInt(apiDateString.substring(0, 4));
+                    const month = parseInt(apiDateString.substring(4, 6)) - 1;
+                    const day = parseInt(apiDateString.substring(6, 8));
+                    const hours = parseInt(apiDateString.substring(9, 11));
+                    const minutes = parseInt(apiDateString.substring(11, 13));
+                    const seconds = parseInt(apiDateString.substring(13, 15));
+                    return new Date(year, month, day, hours, minutes, seconds);
+                } catch (error) {
+                    return new Date('Invalid Date');
+                }
+            }
+            const dailyData = {};
+            data.forEach(item => {
+                const date = parseApiDate(item.Time);
+                if (isNaN(date.getTime())) return;
+                const dateKey = date.toDateString();
+                if (!dailyData[dateKey]) {
+                    dailyData[dateKey] = {
+                        temps: [],
+                        precipitation: [],
+                        windSpeeds: []
+                    };
+                }
+                if (item.Temperature !== undefined) dailyData[dateKey].temps.push(item.Temperature);
+                if (item.Precipitation1h !== undefined) dailyData[dateKey].precipitation.push(item.Precipitation1h);
+                if (item.WindSpeedMS !== undefined) dailyData[dateKey].windSpeeds.push(item.WindSpeedMS);
+            });
+            for (let i = 0; i < allDateStrings.length; i++) {
+                const dateKey = allDateStrings[i];
+                const row = simpleTableBody.insertRow();
+                const dateCell = row.insertCell(0);
+                const tempCell = row.insertCell(1);
+                const rainCell = row.insertCell(2);
+                const windCell = row.insertCell(3);
+                const daily = dailyData[dateKey];
+                const date = new Date(dateKey);
+                dateCell.textContent = date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+                if (daily) {
+                    const minTemp = daily.temps.length > 0 ? Math.min(...daily.temps.filter(t => t !== 'N/A')) : 'N/A';
+                    const maxTemp = daily.temps.length > 0 ? Math.max(...daily.temps.filter(t => t !== 'N/A')) : 'N/A';
+                    if (minTemp !== 'N/A' && maxTemp !== 'N/A') {
+                        tempCell.innerHTML = `<span class=\"min-temp\">${minTemp}°C</span> - <span class=\"max-temp\">${maxTemp}°C</span>`;
+                    } else {
+                        tempCell.textContent = 'N/A';
+                    }
+                    const totalRain = daily.precipitation.reduce((sum, p) => sum + (p || 0), 0);
+                    rainCell.textContent = totalRain > 0 ? `${totalRain.toFixed(1)} mm` : '0 mm';
+                    const minWind = daily.windSpeeds.length > 0 ? Math.min(...daily.windSpeeds.filter(w => w !== 'N/A')) : 'N/A';
+                    const maxWind = daily.windSpeeds.length > 0 ? Math.max(...daily.windSpeeds.filter(w => w !== 'N/A')) : 'N/A';
+                    if (minWind !== 'N/A' && maxWind !== 'N/A') {
+                        windCell.textContent = `${minWind.toFixed(1)} - ${maxWind.toFixed(1)} m/s`;
+                    } else {
+                        windCell.textContent = 'N/A';
+                    }
+                } else {
+                    tempCell.textContent = 'N/A';
+                    rainCell.textContent = 'N/A';
+                    windCell.textContent = 'N/A';
+                }
+            }
+        }
+
+        // Add CSS for the new elements
+        const style = document.createElement('style');
+        style.textContent = `
+            .min-temp {
+                color: #0066cc;
+            }
+            .max-temp {
+                color: #cc0000;
+            }
+            .weather-icon {
+                width: 40px;
+                height: 40px;
+                vertical-align: middle;
+            }
+            .summary-input-container {
+                margin-top: 2rem;
+                padding: 1rem;
+                background-color: #f5f5f5;
+                border-radius: 4px;
+            }
+            .summary-input-container h3 {
+                margin-bottom: 1rem;
+            }
+            #forecast-summary {
+                width: 100%;
+                padding: 0.5rem;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                resize: vertical;
+            }
+            .download-options {
+                margin-bottom: 1rem;
+            }
+            .checkbox-label {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                font-size: 0.9rem;
+                color: #666;
+            }
+            .checkbox-label input[type="checkbox"] {
+                width: 16px;
+                height: 16px;
+                cursor: pointer;
+            }
+            /* Table Styles */
+            .forecast-table-container {
+                margin: 2rem 0;
+                overflow-x: auto;
+            }
+            #forecast-table, #simple-forecast-table {
+                width: 100%;
+                border-collapse: collapse;
+                background-color: white;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            }
+            #forecast-table th, #simple-forecast-table th {
+                background-color: #f8f9fa;
+                color: #333;
+                font-weight: 600;
+                text-align: center;
+                padding: 12px 8px;
+                border: 1px solid #dee2e6;
+                white-space: nowrap;
+            }
+            #forecast-table td, #simple-forecast-table td {
+                padding: 12px 8px;
+                border: 1px solid #dee2e6;
+                text-align: center;
+                vertical-align: middle;
+            }
+            #forecast-table tr:nth-child(even), #simple-forecast-table tr:nth-child(even) {
+                background-color: #f8f9fa;
+            }
+            #forecast-table tr:hover, #simple-forecast-table tr:hover {
+                background-color: #f1f3f5;
+            }
+            .weather-symbol {
+                display: inline-block;
+                width: 40px;
+                height: 40px;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+                font-size: 12px;
+                line-height: 40px;
+                text-align: center;
+                color: #666;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Event listeners for dropdowns and buttons
+        daysSelect.addEventListener('change', fetchForecast);
+        locationSelect.addEventListener('change', fetchForecast);
+
+        // Initial load
+        (async () => {
+            populateLocationsDropdown();
+            await fetchForecast(); // Await the initial fetch
+        })();
+
+        // Remove any existing download buttons from the containers first
+        Array.from(detailedTableContainer.querySelectorAll('.climate-button')).forEach(btn => btn.remove());
+        Array.from(simpleTableContainer.querySelectorAll('.climate-button')).forEach(btn => btn.remove());
+
+        // Add PNG download buttons under each table (only one per table)
+        const detailedDownloadBtn = document.createElement('button');
+        detailedDownloadBtn.textContent = 'Download 3-Day Table as PNG';
+        detailedDownloadBtn.className = 'climate-button';
+        detailedDownloadBtn.style.marginTop = '1rem';
+        detailedTableContainer.appendChild(detailedDownloadBtn);
+        const simpleDownloadBtn = document.createElement('button');
+        simpleDownloadBtn.textContent = 'Download 4+ Days Table as PNG';
+        simpleDownloadBtn.className = 'climate-button';
+        simpleDownloadBtn.style.marginTop = '1rem';
+        simpleTableContainer.appendChild(simpleDownloadBtn);
+
+        // Use dom-to-image-more for PNG download
+        function downloadTableWithDomToImage(tableId, filename) {
+            const table = document.getElementById(tableId);
+            domtoimage.toPng(table)
+                .then(function (dataUrl) {
+                    const link = document.createElement('a');
+                    link.download = filename;
+                    link.href = dataUrl;
+                    link.click();
+                })
+                .catch(function (error) {
+                    console.error('Error generating PNG:', error);
+                });
+        }
+
+        detailedDownloadBtn.addEventListener('click', function() {
+            downloadTableWithDomToImage('forecast-table', '3-day-forecast-table.png');
+        });
+        simpleDownloadBtn.addEventListener('click', function() {
+            downloadTableWithDomToImage('simple-forecast-table', '4plus-days-forecast-table.png');
+        });
+
+    </script>
+</body>
+
+</html>

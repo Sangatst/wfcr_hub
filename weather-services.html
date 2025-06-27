@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Services | NCHM</title>
+    <link rel="stylesheet" href="climatedata.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@400;700;900&display=swap">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+        .service-detail {
+            margin-bottom: 40px;
+            margin-top: 60px; /* Added margin at the top for additional spacing */
+            border-radius: var(--border-radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            background-color: var(--background-white);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-detail:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .service-header {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 20px 25px;
+            position: relative;
+        }
+
+        .service-header h3 {
+            margin: 0;
+            color: var(--text-light);
+            font-size: 1.5rem;
+        }
+
+        .service-header p {
+            margin: 10px 0 0;
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        .service-body {
+            padding: 25px;
+        }
+
+        .service-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        .service-text {
+            flex: 3;
+            min-width: 300px;
+        }
+
+        .service-image {
+            flex: 2;
+            min-width: 250px;
+            border-radius: var(--border-radius-sm);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .service-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .service-detail:hover .service-image img {
+            transform: scale(1.03);
+        }
+
+        .service-offerings {
+            margin-top: 25px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .service-offering {
+            background-color: var(--background-light);
+            padding: 15px;
+            border-radius: var(--border-radius-sm);
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .service-offering h4 {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .service-offering p {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: var(--border-radius-sm);
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        @media (max-width: 768px) {
+            .service-content {
+                flex-direction: column;
+            }
+
+            .service-offerings {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <!-- Header -->
+        <header>
+            <h1>Meteorological Services Division</h1>
+            <h3>Weather Forecasting Section</h3>
+        </header>
+
+        <!-- Navigation Bar -->
+        <nav class="main-nav">
+            <div class="nav-container">
+                <div class="social-container">
+                    <a href="https://www.facebook.com/NationalCentreforHydrologyandMeteorology" target="_blank" rel="noopener" class="social-link" title="NCHM Facebook Page"><i class="fa fa-facebook"></i></a>
+                </div>
+                <button type="button" class="menu-toggle" id="menuToggle" title="Toggle Menu">
+                    <span class="menu-icon"></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="index.html#home" class="home-link"><i class="fa fa-home"></i> Home</a></li>
+                    <li><a href="index.html#forecasting">Forecasting Tools</a></li>
+                    <li><a href="index.html#weather-services">Weather Services</a></li>
+                    <li><a href="index.html#climate-guidance">Climate Guidance</a></li>
+                    <li><a href="index.html#verification">Verification</a></li>
+                    <li><a href="index.html#weather-formats">Weather Formats</a></li>
+                    <li><a href="system-ip-and-urls.html">Systems</a></li>
+                </ul>
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Search..." aria-label="Search">
+                    <button type="button" id="search-button" title="Search"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <section class="content-section">
+                <div class="section-header">
+                    <h2>Weather Services</h2>
+                </div>
+                <div class="section-content">
+                    <p>The National Center for Hydrology and Meteorology (NCHM) provides a comprehensive range of weather services tailored to meet the needs of various sectors and the general public. Our services combine scientific expertise with advanced technology to deliver accurate and timely weather information.</p>
+
+                    <a href="index.html#weather-services" class="back-link"><i class="fa fa-arrow-left"></i> Back to Dashboard</a>
+
+                    <!-- Public Weather Services -->
+                    <div id="public-weather-services" class="service-detail" data-aos="fade-up">
+                        <div class="service-header">
+                            <h3>Public Weather Services</h3>
+                            <p>Daily forecasts and weather information for the general public</p>
+                        </div>
+                        <div class="service-body">
+                            <div class="service-content">
+                                <div class="service-text">
+                                    <p>Our Public Weather Services provide essential weather information to the general public, government agencies, and various sectors. These services are designed to be accessible, easy to understand, and relevant to daily decision-making.</p>
+                                    <p>NCHM delivers weather forecasts through multiple channels including our website, mobile applications, social media, radio, television, and SMS alerts. Our forecasts cover temperature, precipitation, wind, humidity, and other weather parameters for all districts and major cities in Bhutan.</p>
+                                </div>
+                                
+                            </div>
+
+                            <div class="service-offerings">
+                                <div class="service-offering">
+                                    <h4>Daily Forecasts</h4>
+                                    <p>24-hour and 5-day forecasts for all districts and major cities, updated four times daily.</p>
+                                </div>
+                                <div class="service-offering">
+                                    <h4>Weather Warnings</h4>
+                                    <p>Timely alerts for severe weather events including heavy rainfall, thunderstorms, and extreme temperatures.</p>
+                                </div>
+                                <div class="service-offering">
+                                    <h4>Weather Maps</h4>
+                                    <p>Visual representations of current and forecast weather conditions across the country.</p>
+                                </div>
+                                <div class="service-offering">
+                                    <h4>Weather News</h4>
+                                    <p>Regular updates on significant weather events and their potential impacts.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Aviation Weather -->
+                    <div id="aviation-weather" class="service-detail" data-aos="fade-up" data-aos-delay="100">
+                        <div class="service-header">
+                            <h3>Aviation Weather</h3>
+                            <p>Specialized forecasts for aviation operations</p>
+                        </div>
+                        <div class="service-body">
+                            <div class="service-content">
+                                <div class="service-text">
+                                    <p>NCHM provides specialized aviation weather services to support safe and efficient air operations in Bhutan's challenging mountainous terrain. Our aviation forecasts adhere to International Civil Aviation Organization (ICAO) standards and are tailored to the specific needs of pilots, air traffic controllers, and airport operators.</p>
+                                    <p>Given Bhutan's unique topography, our aviation weather services incorporate detailed knowledge of local weather patterns and terrain-induced phenomena to enhance flight safety in the region.</p>
+                                </div>
+                                
+                            </div>
+
+                            <div class="service-offerings">
+                                <div class="service-offering">
+                                    <h4>Terminal Aerodrome Forecasts (TAF)</h4>
+                                    <p>Detailed forecasts for airports including wind, visibility, cloud, and weather conditions.</p>
+                                </div>
+                                <div class="service-offering">
+                                    <h4>SIGMET & AIRMET</h4>
+                                    <p>Information about weather phenomena that may affect aircraft safety, including turbulence, icing, and mountain waves.</p>
+                                </div>
+                                <div class="service-offering">
+                                    <h4>Route Forecasts</h4>
+                                    <p>Weather information for specific flight routes, including wind and temperature at various flight levels.</p>
+                                </div>
+                                <div class="service-offering">
+                                    <h4>Pre-flight Briefings</h4>
+                                    <p>Comprehensive weather briefings for pilots before departure, highlighting potential hazards.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Agricultural Weather -->
+                    <div id="agricultural-weather" class="service-detail" data-aos="fade-up" data-aos-delay="200">
+                        <div class="service-header">
+                            <h3>Agricultural Weather</h3>
+                            <p>Weather information tailored for agricultural planning and operations</p>
+                        </div>
+                        <div class="service-body">
+                            <div class="service-content">
+                                <div class="service-text">
+                                    <p>Our Agricultural Weather Services provide farmers, agricultural extension officers, and policymakers with specialized weather information to support agricultural planning and operations. These services help optimize planting and harvesting schedules, manage irrigation, and mitigate weather-related risks to crops and livestock.</p>
+                                    <p>NCHM collaborates closely with the Ministry of Agriculture and Forests to ensure that our agricultural weather services address the specific needs of Bhutan's diverse agricultural systems across different agro-ecological zones.</p>
+                                </div>
+                                
+                            </div>
+
+                            <div class="service-offerings">
+                                <div class="service-offering">
+                                    <h4>Agro-meteorological Bulletins</h4>
+                                    <p>Weekly bulletins with weather information relevant to agricultural activities and crop-specific advisories.</p>
+                                </div>
+                                <div class="service-offering">
+                                    <h4>Seasonal Outlooks</h4>
+                                    <p>Long-term forecasts to support seasonal planning for planting, irrigation, and harvesting.</p>
+                                </div>
+                                <div class="service-offering">
+                                    <h4>Frost and Freeze Warnings</h4>
+                                    <p>Early warnings for frost events to help farmers protect sensitive crops.</p>
+                                </div>
+                                <div class="service-offering">
+                                    <h4>Crop Weather Calendars</h4>
+                                    <p>Customized calendars that align weather patterns with optimal timing for various agricultural activities.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hydrometeorological Services -->
+                    <div id="hydrometeorological-services" class="service-detail" data-aos="fade-up" data-aos-delay="300">
+                        <div class="service-header">
+                            <h3>Hydrometeorological Services</h3>
+                            <p>Water-related weather services for flood forecasting and water management</p>
+                        </div>
+                        <div class="service-body">
+                            <div class="service-content">
+                                <div class="service-text">
+                                    <p>NCHM's Hydrometeorological Services focus on the interaction between weather and water resources. These services are crucial for flood forecasting, water resource management, hydropower operations, and disaster risk reduction in Bhutan's river basins.</p>
+                                    <p>Our hydrometeorological monitoring network includes automated weather stations, river gauges, and snow monitoring sites that provide real-time data on precipitation, river levels, and snowpack conditions. This data feeds into our hydrological models to generate forecasts and warnings.</p>
+                                </div>
+                                
+                            </div>
+
+                            <div class="service-offerings">
+                                <div class="service-offering">
+                                    <h4>Flood Forecasting</h4>
+                                    <p>Early warning system for potential floods based on rainfall forecasts and river basin conditions.</p>
+                                </div>
+                                <div class="service-offering">
+                                    <h4>Glacial Lake Outburst Flood (GLOF) Monitoring</h4>
+                                    <p>Specialized monitoring and early warning for glacial lake outburst floods in high mountain areas.</p>
+                                </div>
+                                <div class="service-offering">
+                                    <h4>Drought Monitoring</h4>
+                                    <p>Regular assessment of drought conditions and their potential impacts on water resources.</p>
+                                </div>
+                                <div class="service-offering">
+                                    <h4>Snowpack Analysis</h4>
+                                    <p>Monitoring and forecasting of snow accumulation and melt for water resource planning and avalanche risk assessment.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Time Series 10 Days Forecast -->
+                    <div id="time-series-forecast" class="service-detail" data-aos="fade-up">
+                        <div class="service-header">
+                            <h3>Time Series 10 Days Forecast</h3>
+                            <p>Detailed weather forecasts with time series data</p>
+                        </div>
+                        <div class="service-body">
+                            <div class="service-content">
+                                <div class="service-text">
+                                    <p>Our Time Series 10 Days Forecast service provides detailed weather predictions for various locations across Bhutan. This service includes comprehensive time series data for temperature, precipitation, wind speed, and other meteorological parameters.</p>
+                                    <p>The forecasts are generated using advanced numerical weather prediction models and are updated daily to ensure accuracy and reliability.</p>
+                                </div>
+                            </div>
+
+                            <div class="service-offerings">
+                                <div class="service-offering">
+                                    <h4>Temperature Forecasts</h4>
+                                    <p>Hourly and daily temperature predictions for the next 10 days.</p>
+                                </div>
+                                <div class="service-offering">
+                                    <h4>Precipitation Forecasts</h4>
+                                    <p>Detailed rainfall and snowfall predictions with probability estimates.</p>
+                                </div>
+                                <div class="service-offering">
+                                    <h4>Wind Forecasts</h4>
+                                    <p>Wind speed and direction predictions for various locations.</p>
+                                </div>
+                                <div class="service-offering">
+                                    <h4>Weather Parameters</h4>
+                                    <p>Additional parameters including humidity, pressure, and visibility.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3 Days Map Forecast -->
+                    <div id="map-forecast" class="service-detail" data-aos="fade-up" data-aos-delay="200">
+                        <div class="service-header">
+                            <h3>3 Days Map Forecast</h3>
+                            <p>Visual weather maps for the next 3 days</p>
+                        </div>
+                        <div class="service-body">
+                            <div class="service-content">
+                                <div class="service-text">
+                                    <p>The 3 Days Map Forecast service provides visual representations of weather conditions across Bhutan. These maps help users understand weather patterns and make informed decisions based on forecasted conditions.</p>
+                                    <p>Our maps are generated using high-resolution weather models and are updated regularly to reflect the latest forecast data.</p>
+                                </div>
+                            </div>
+
+                            <div class="service-offerings">
+                                <div class="service-offering">
+                                    <h4>Temperature Maps</h4>
+                                    <p>Color-coded maps showing temperature variations across regions.</p>
+                                </div>
+                                <div class="service-offering">
+                                    <h4>Precipitation Maps</h4>
+                                    <p>Rainfall and snowfall distribution maps with intensity indicators.</p>
+                                </div>
+                                <div class="service-offering">
+                                    <h4>Wind Maps</h4>
+                                    <p>Wind flow patterns and speed distribution across the country.</p>
+                                </div>
+                                <div class="service-offering">
+                                    <h4>Weather Systems</h4>
+                                    <p>Maps showing weather systems, fronts, and pressure patterns.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Warning Maps -->
+                    <div id="warning-maps" class="service-detail" data-aos="fade-up" data-aos-delay="300">
+                        <div class="service-header">
+                            <h3>Warning Maps</h3>
+                            <p>Real-time warning maps for severe weather conditions</p>
+                        </div>
+                        <div class="service-body">
+                            <div class="service-content">
+                                <div class="service-text">
+                                    <p>Our Warning Maps service provides real-time information about severe weather conditions across Bhutan. These maps are crucial for emergency response and public safety, particularly during extreme weather events.</p>
+                                    <p>The warning system includes both wind and rainfall warnings, with different severity levels to help users understand the potential impact of weather conditions.</p>
+                                </div>
+                            </div>
+
+                            <div class="service-offerings">
+                                <div class="service-offering">
+                                    <h4>Wind Warning Maps</h4>
+                                    <p>Real-time maps showing areas affected by strong winds and gusts.</p>
+                                </div>
+                                <div class="service-offering">
+                                    <h4>Rainfall Warning Maps</h4>
+                                    <p>Maps indicating areas with heavy rainfall and potential flooding risks.</p>
+                                </div>
+                                <div class="service-offering">
+                                    <h4>Warning Levels</h4>
+                                    <p>Color-coded warning levels indicating severity of weather conditions.</p>
+                                </div>
+                                <div class="service-offering">
+                                    <h4>Impact Assessment</h4>
+                                    <p>Information about potential impacts of severe weather conditions.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Smartmet Products -->
+                    <div id="smartmet-products" class="service-detail" data-aos="fade-up" data-aos-delay="400">
+                        <div class="service-header">
+                            <h3>Smartmet Products</h3>
+                            <p>Advanced weather products powered by Smartmet technology</p>
+                        </div>
+                        <div class="service-body">
+                            <div class="service-content">
+                                <div class="service-text">
+                                    <p>The Smartmet Products service offers advanced weather forecasting tools and products powered by state-of-the-art Smartmet technology. These products provide detailed and accurate weather information for various applications.</p>
+                                    <p>Our Smartmet products are designed to meet the needs of different users, from meteorologists to the general public, with user-friendly interfaces and comprehensive data visualization.</p>
+                                </div>
+                            </div>
+
+                            <div class="service-offerings">
+                                <div class="service-offering">
+                                    <h4>Forecast Products</h4>
+                                    <p>Advanced forecasting tools with high-resolution data and visualization.</p>
+                                </div>
+                                <div class="service-offering">
+                                    <h4>Analysis Tools</h4>
+                                    <p>Tools for analyzing weather patterns and historical data.</p>
+                                </div>
+                                <div class="service-offering">
+                                    <h4>Custom Solutions</h4>
+                                    <p>Tailored weather products for specific user requirements.</p>
+                                </div>
+                                <div class="service-offering">
+                                    <h4>Data Integration</h4>
+                                    <p>Tools for integrating weather data with other systems and applications.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="index.html#weather-services" class="back-link"><i class="fa fa-arrow-left"></i> Back to Dashboard</a>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <p class="address">Weather Forecasting Section, MSD</p>
+                <p class="email"><i>wfcr@nchm.gov.bt</i></p>
+                <p class="phone">+975-335578 | +975-77452632</p>
+            </footer>
+
+            <!-- Back to top button -->
+            <button type="button" id="back-to-top" title="Back to top"><i class="fa fa-arrow-up" aria-hidden="true"></i><span class="sr-only">Back to top</span></button>
+        </main>
+    </div>
+
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        // Check if animations should be disabled
+        const noAnimation = sessionStorage.getItem('noAnimation') === 'true';
+
+        // Initialize AOS with animations disabled if coming from a "View Details" button
+        AOS.init({
+            duration: 800,
+            easing: 'ease',
+            once: true,
+            disable: noAnimation // Disable animations if coming from a "View Details" button
+        });
+
+        // Clear the noAnimation flag
+        if (noAnimation) {
+            sessionStorage.removeItem('noAnimation');
+        }
+
+        // Check if we need to scroll to a specific section (from sessionStorage)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the section ID from sessionStorage
+            const sectionId = sessionStorage.getItem('scrollToSection');
+            if (sectionId) {
+                console.log('Found section ID in sessionStorage:', sectionId);
+
+                // Clear the sessionStorage to avoid scrolling on page refresh
+                sessionStorage.removeItem('scrollToSection');
+
+                // Find the section element
+                const sectionElement = document.getElementById(sectionId);
+                if (sectionElement) {
+                    console.log('Found section element:', sectionElement);
+
+                    // Check if animations are disabled
+                    const noAnimation = sessionStorage.getItem('noAnimation') === 'true';
+
+                    // Wait a bit for the page to fully render
+                    setTimeout(function() {
+                        // Get the position of the element
+                        const rect = sectionElement.getBoundingClientRect();
+                        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+                        // Calculate the position to scroll to (accounting for navbar height)
+                        const navbarHeight = document.querySelector('.main-nav').offsetHeight;
+
+                        // Use a fixed offset to ensure consistent positioning
+                        const scrollToPosition = rect.top + scrollTop - navbarHeight - 60;
+
+                        console.log('Scrolling to position:', scrollToPosition);
+
+                        // Scroll to the section (without animation if noAnimation is true)
+                        window.scrollTo({
+                            top: scrollToPosition,
+                            behavior: noAnimation ? 'auto' : 'smooth'
+                        });
+                    }, noAnimation ? 100 : 300); // Shorter delay if no animation
+                }
+            }
+        });
+
+        // Toggle navigation menu on mobile
+        document.getElementById('menuToggle').addEventListener('click', function(e) {
+            e.stopPropagation();
+            document.querySelector('.nav-menu').classList.toggle('active');
+            this.classList.toggle('active');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navMenu = document.querySelector('.nav-menu');
+            const menuToggle = document.getElementById('menuToggle');
+
+            if (navMenu.classList.contains('active') &&
+                !navMenu.contains(event.target) &&
+                !menuToggle.contains(event.target)) {
+                navMenu.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        });
+
+        // Back to top button functionality
+        const backToTopButton = document.getElementById('back-to-top');
+
+        // Show button when user scrolls down 300px
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+
+        // Scroll to top when button is clicked
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>

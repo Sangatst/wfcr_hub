@@ -1,0 +1,649 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+nav {
+    margin-top: 15px;
+}
+
+.nav-link {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.nav-link:hover {
+    background-color: #2980b9;
+}
+
+h1 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.selectors {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.selector-item {
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+    margin-bottom: 10px;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.download-section {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.chart-interpretation {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.chart-interpretation h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.chart-interpretation p {
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.data-summary {
+    margin-top: 20px;
+}
+
+.data-summary h4 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+#temp-extremes-table, #tmin-extremes-table, #tmean-extremes-table, #rainfall-extremes-table,
+#rainfall-line-extremes-table, #rainfall-bar-extremes-table, #rainfall-boxplot-extremes-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+#temp-extremes-table th,
+#temp-extremes-table td,
+#tmin-extremes-table th,
+#tmin-extremes-table td,
+#tmean-extremes-table th,
+#tmean-extremes-table td,
+#rainfall-extremes-table th,
+#rainfall-extremes-table td,
+#rainfall-line-extremes-table th,
+#rainfall-line-extremes-table td,
+#rainfall-bar-extremes-table th,
+#rainfall-bar-extremes-table td,
+#rainfall-boxplot-extremes-table th,
+#rainfall-boxplot-extremes-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+#temp-extremes-table th,
+#tmin-extremes-table th,
+#tmean-extremes-table th,
+#rainfall-extremes-table th,
+#rainfall-line-extremes-table th,
+#rainfall-bar-extremes-table th,
+#rainfall-boxplot-extremes-table th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: bold;
+}
+
+#temp-extremes-table tr:nth-child(even),
+#tmin-extremes-table tr:nth-child(even),
+#tmean-extremes-table tr:nth-child(even),
+#rainfall-extremes-table tr:nth-child(even),
+#rainfall-line-extremes-table tr:nth-child(even),
+#rainfall-bar-extremes-table tr:nth-child(even),
+#rainfall-boxplot-extremes-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#temp-extremes-table tr:hover,
+#tmin-extremes-table tr:hover,
+#tmean-extremes-table tr:hover,
+#rainfall-extremes-table tr:hover,
+#rainfall-line-extremes-table tr:hover,
+#rainfall-bar-extremes-table tr:hover,
+#rainfall-boxplot-extremes-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+label {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+    font-size: 14px;
+}
+
+button {
+    padding: 8px 16px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+.chart-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden; /* Contain the scrollable chart */
+}
+
+#chart, #tmin-chart, #tmean-chart, #rainfall-chart, #rainfall-line-chart, #rainfall-bar-chart, #rainfall-boxplot-chart {
+    width: 100%;
+    height: 600px; /* Increased height from 500px to 600px */
+    margin: 0 auto; /* Center the chart horizontally */
+    padding-bottom: 0; /* Ensure no bottom padding */
+    overflow: hidden; /* Hide all overflow */
+    position: relative; /* Ensure proper positioning of elements */
+}
+
+/* Desktop-specific styles to reduce space between chart and legend */
+@media screen and (min-width: 769px) {
+    .legend {
+        margin-top: -30px; /* Further increased negative margin to pull legend up closer to chart */
+    }
+}
+
+.legend {
+    display: flex;
+    justify-content: center;
+    margin-top: -30px; /* Further increased negative margin to pull legend up closer to chart */
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin: 0 15px;
+}
+
+.color-box {
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+    border-radius: 2px;
+}
+
+.color-box.current-year {
+    background-color: #e74c3c;
+}
+
+.color-box.mean {
+    background-color: #3498db;
+}
+
+.color-box.max {
+    background-color: #f39c12;
+}
+
+.color-box.min {
+    background-color: #2ecc71;
+}
+
+/* Tmin chart colors - using cooler blue colors for minimum temperature */
+.color-box.tmin-current-year {
+    background-color: #be193f; /* Red for current year */
+}
+
+.color-box.tmin-mean {
+    background-color: #0077b6; /* Darker blue for mean */
+}
+
+.color-box.tmin-max {
+    background-color: #48cae4; /* Light blue for max */
+}
+
+.color-box.tmin-min {
+    background-color: #03045e; /* Deep blue for min */
+}
+
+/* Tmean chart colors - using balanced colors for mean temperature */
+.color-box.tmean-current-year {
+    background-color: #8e44ad; /* Dark Purple */
+}
+
+.color-box.tmean-mean {
+    background-color: #27ae60; /* Green */
+}
+
+.color-box.tmean-max {
+    background-color: #d35400; /* Orange */
+}
+
+.color-box.tmean-min {
+    background-color: #2980b9; /* Blue */
+}
+
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.loading p {
+    margin: 10px 0;
+    font-size: 16px;
+    text-align: center;
+}
+
+#loading-message {
+    font-size: 14px;
+    color: #3498db;
+    max-width: 80%;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.spinner {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.tooltip {
+    position: absolute;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.95);
+    color: #333;
+    border-radius: 4px;
+    pointer-events: none;
+    font-size: 12px;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ddd;
+    max-width: 250px;
+    line-height: 1.5;
+}
+
+.tooltip-date {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.tooltip-item {
+    display: flex;
+    margin: 4px 0;
+    align-items: center;
+}
+
+.tooltip-color {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 8px;
+    display: inline-block;
+}
+
+.tooltip-label {
+    margin-right: 5px;
+}
+
+.tooltip-value {
+    font-weight: bold;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #ddd;
+    shape-rendering: crispEdges;
+}
+
+.axis text {
+    font-size: 12px;
+    fill: #666;
+}
+
+.grid line {
+    stroke: #eee;
+    shape-rendering: crispEdges;
+}
+
+.hidden {
+    display: none;
+}
+
+.error-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+    padding: 15px;
+    display: none;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.error-container.show {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.error-message {
+    flex-grow: 1;
+    margin-right: 15px;
+}
+
+#dismiss-error {
+    background-color: #721c24;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#dismiss-error:hover {
+    background-color: #5a171d;
+}
+
+/* Responsive styles for mobile devices */
+@media screen and (max-width: 768px) {
+    /* Center align the container on mobile */
+    .container {
+        padding: 20px 0;
+        margin: 0;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+        overflow-x: hidden;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .selectors {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .selector-item {
+        width: 100%;
+        margin-right: 0;
+        justify-content: center;
+    }
+
+    .legend {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .legend-item {
+        margin: 5px;
+    }
+
+    .buttons {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+
+    button {
+        width: 100%;
+    }
+
+    #chart, #tmin-chart, #tmean-chart, #rainfall-chart, #rainfall-line-chart, #rainfall-bar-chart, #rainfall-boxplot-chart {
+        height: 550px; /* Increased height from 450px to 550px */
+        margin: 20px 0; /* Remove horizontal margin */
+        width: 100%;
+        overflow: hidden; /* Hide overflow to prevent z-axis issues */
+        display: block; /* Changed to block for better scrolling behavior */
+        position: relative; /* Ensure proper positioning */
+    }
+
+    #chart svg, #tmin-chart svg, #tmean-chart svg, #rainfall-chart svg, #rainfall-line-chart svg, #rainfall-bar-chart svg, #rainfall-boxplot-chart svg {
+        width: 100% !important; /* Use 100% width to fit container */
+        max-width: 1200px; /* Maximum width */
+        height: 550px !important; /* Increased height from 450px to 550px */
+        overflow: hidden; /* Hide overflow to prevent z-axis issues */
+        display: block; /* Ensure proper display */
+    }
+
+    /* Style the scrollbar */
+    #chart::-webkit-scrollbar, #tmin-chart::-webkit-scrollbar, #tmean-chart::-webkit-scrollbar, #rainfall-chart::-webkit-scrollbar,
+    #rainfall-line-chart::-webkit-scrollbar, #rainfall-bar-chart::-webkit-scrollbar, #rainfall-boxplot-chart::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    #chart::-webkit-scrollbar-track, #tmin-chart::-webkit-scrollbar-track, #tmean-chart::-webkit-scrollbar-track, #rainfall-chart::-webkit-scrollbar-track,
+    #rainfall-line-chart::-webkit-scrollbar-track, #rainfall-bar-chart::-webkit-scrollbar-track, #rainfall-boxplot-chart::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+    }
+
+    #chart::-webkit-scrollbar-thumb, #tmin-chart::-webkit-scrollbar-thumb, #tmean-chart::-webkit-scrollbar-thumb, #rainfall-chart::-webkit-scrollbar-thumb,
+    #rainfall-line-chart::-webkit-scrollbar-thumb, #rainfall-bar-chart::-webkit-scrollbar-thumb, #rainfall-boxplot-chart::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 4px;
+    }
+
+    /* Ensure axis labels are visible */
+    #chart .axis text, #tmin-chart .axis text, #tmean-chart .axis text, #rainfall-chart .axis text,
+    #rainfall-line-chart .axis text, #rainfall-bar-chart .axis text, #rainfall-boxplot-chart .axis text {
+        font-size: 10px;
+        font-weight: bold;
+        visibility: visible !important;
+    }
+
+    #chart .x-axis text, #tmin-chart .x-axis text, #tmean-chart .x-axis text, #rainfall-chart .x-axis text,
+    #rainfall-line-chart .x-axis text, #rainfall-bar-chart .x-axis text, #rainfall-boxplot-chart .x-axis text {
+        visibility: visible !important;
+    }
+
+    /* Ensure y-axis is visible */
+    #chart .y-axis text, #tmin-chart .y-axis text, #tmean-chart .y-axis text, #rainfall-chart .y-axis text,
+    #rainfall-line-chart .y-axis text, #rainfall-bar-chart .y-axis text, #rainfall-boxplot-chart .y-axis text {
+        visibility: visible !important;
+    }
+
+    #temp-extremes-table, #tmin-extremes-table, #tmean-extremes-table, #rainfall-extremes-table,
+    #rainfall-line-extremes-table, #rainfall-bar-extremes-table, #rainfall-boxplot-extremes-table {
+        font-size: 12px;
+        margin: 0 auto; /* Center the table */
+        width: 100%;
+    }
+
+    #temp-extremes-table th,
+    #temp-extremes-table td,
+    #tmin-extremes-table th,
+    #tmin-extremes-table td,
+    #tmean-extremes-table th,
+    #tmean-extremes-table td,
+    #rainfall-extremes-table th,
+    #rainfall-extremes-table td,
+    #rainfall-line-extremes-table th,
+    #rainfall-line-extremes-table td,
+    #rainfall-bar-extremes-table th,
+    #rainfall-bar-extremes-table td,
+    #rainfall-boxplot-extremes-table th,
+    #rainfall-boxplot-extremes-table td {
+        padding: 4px;
+    }
+
+    .chart-interpretation {
+        text-align: center;
+        padding: 15px 0;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .chart-interpretation p {
+        text-align: center;
+        padding: 0 10px;
+        margin: 10px 0;
+    }
+
+    .data-summary {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .data-summary h4 {
+        margin: 10px 0;
+    }
+
+    .controls, .download-section, .chart-interpretation {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .chart-container {
+        display: block; /* Changed to block for better layout */
+        padding: 10px 0; /* Remove horizontal padding */
+        margin: 20px 0 40px 0; /* Reduced bottom margin */
+        overflow: hidden; /* Hide overflow at container level */
+        height: auto;
+        width: 100%;
+        box-sizing: border-box;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Center the legend */
+    .legend {
+        width: 100%;
+        padding: 0;
+        margin-top: -15px; /* Added negative margin to pull legend up closer to chart on mobile */
+        box-sizing: border-box;
+    }
+}
+
+.section-title {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: #2c3e50;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Back button styles */
+.back-link {
+    background-color: #f0f0f0;
+    padding: 8px 15px;
+    border-radius: 4px;
+    margin-right: 15px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.back-link:hover {
+    background-color: #e0e0e0;
+}

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rainfall Observation Charts</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/chart-lines.css">
+    <link rel="stylesheet" href="css/rainfall-charts.css">
+    <!-- D3.js -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <!-- Shapefile.js for loading actual shapefiles with fallback CDNs -->
+    <script src="https://cdn.jsdelivr.net/npm/shapefile@0.6.6/dist/shapefile.js"
+            onerror="this.onerror=null; this.src='https://unpkg.com/shapefile@0.6.6/dist/shapefile.js'"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Rainfall Observation Charts</h1>
+            <nav>
+                <a href="../index.html" class="nav-link back-link">← Back to Home</a>
+                <a href="index.html" class="nav-link">View Temperature Charts</a>
+            </nav>
+        </header>
+
+        <div class="controls">
+            <div class="control-group">
+                <label for="station">Station:</label>
+                <select id="station">
+                    <option value="loading">Loading stations...</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="month">Month:</label>
+                <select id="month">
+                    <option value="all">All Months</option>
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="loading hide" id="loading">
+            <div class="spinner"></div>
+            <p>Loading data...</p>
+            <p id="loading-message">Initializing...</p>
+        </div>
+
+        <!-- Line Chart with Shaded Range Section -->
+        <h2 class="section-title">Daily Rainfall: Line Chart with Range</h2>
+        <div class="chart-container" id="rainfall-line-chart-container">
+            <div id="rainfall-line-chart"></div>
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="color-box rainfall-current-year"></div>
+                    <span>Current Year</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-box rainfall-mean"></div>
+                    <span id="rainfall-historical-mean-label">Historical Mean</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-box rainfall-range"></div>
+                    <span id="rainfall-historical-range-label">Historical Range</span>
+                </div>
+            </div>
+
+            <div class="download-section">
+                <div class="buttons">
+                    <button id="download-rainfall-line-stats" type="button">Download Statistics</button>
+                    <button id="download-rainfall-line-current" type="button">Download Current Year</button>
+                    <button id="download-rainfall-line-chart" type="button">Download Chart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-interpretation">
+            <h3>Rainfall Line Chart Interpretation</h3>
+            <p id="rainfall-line-chart-summary">Select a station and month to view the interpretation.</p>
+
+            <div class="data-summary">
+                <h4>Rainfall Extremes</h4>
+                <table id="rainfall-line-extremes-table">
+                    <thead>
+                        <tr>
+                            <th>Dataset</th>
+                            <th>Highest Rainfall</th>
+                            <th>Date</th>
+                            <th>Rainy Days</th>
+                            <th>Total Rainfall</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="rainfall-line-historical-extremes">
+                            <td>Historical</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                        </tr>
+                        <tr id="rainfall-line-current-year-extremes">
+                            <td>Current Year</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Bar Chart with Overlay Line Section -->
+        <h2 class="section-title">Daily Rainfall: Bar Chart with Mean Line</h2>
+        <div class="chart-container" id="rainfall-bar-chart-container">
+            <div id="rainfall-bar-chart"></div>
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="color-box rainfall-bar-color"></div>
+                    <span>Current Year Rainfall</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-box rainfall-mean-line"></div>
+                    <span>Historical Mean</span>
+                </div>
+            </div>
+
+            <div class="download-section">
+                <div class="buttons">
+                    <button id="download-rainfall-bar-stats" type="button">Download Statistics</button>
+                    <button id="download-rainfall-bar-current" type="button">Download Current Year</button>
+                    <button id="download-rainfall-bar-chart" type="button">Download Chart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-interpretation">
+            <h3>Rainfall Bar Chart Interpretation</h3>
+            <p id="rainfall-bar-chart-summary">Select a station and month to view the interpretation.</p>
+
+            <div class="data-summary">
+                <h4>Rainfall Extremes</h4>
+                <table id="rainfall-bar-extremes-table">
+                    <thead>
+                        <tr>
+                            <th>Dataset</th>
+                            <th>Highest Rainfall</th>
+                            <th>Date</th>
+                            <th>Rainy Days</th>
+                            <th>Total Rainfall</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="rainfall-bar-historical-extremes">
+                            <td>Historical</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                        </tr>
+                        <tr id="rainfall-bar-current-year-extremes">
+                            <td>Current Year</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Boxplot Chart Section -->
+        <h2 class="section-title">Daily Rainfall: Boxplot Chart</h2>
+        <div class="chart-container" id="rainfall-boxplot-chart-container">
+            <div id="rainfall-boxplot-chart"></div>
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="color-box rainfall-boxplot"></div>
+                    <span>Historical Distribution</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-box rainfall-current-year-point"></div>
+                    <span>Current Year</span>
+                </div>
+            </div>
+
+            <div class="download-section">
+                <div class="buttons">
+                    <button id="download-rainfall-boxplot-stats" type="button">Download Statistics</button>
+                    <button id="download-rainfall-boxplot-current" type="button">Download Current Year</button>
+                    <button id="download-rainfall-boxplot-chart" type="button">Download Chart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-interpretation">
+            <h3>Rainfall Boxplot Chart Interpretation</h3>
+            <p id="rainfall-boxplot-chart-summary">Select a station and month to view the interpretation.</p>
+
+            <div class="data-summary">
+                <h4>Rainfall Extremes</h4>
+                <table id="rainfall-boxplot-extremes-table">
+                    <thead>
+                        <tr>
+                            <th>Dataset</th>
+                            <th>Highest Rainfall</th>
+                            <th>Date</th>
+                            <th>Rainy Days</th>
+                            <th>Total Rainfall</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="rainfall-boxplot-historical-extremes">
+                            <td>Historical</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                        </tr>
+                        <tr id="rainfall-boxplot-current-year-extremes">
+                            <td>Current Year</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Bhutan Rainfall Map Section -->
+        <h2 class="section-title">Rainfall Accumulation Map</h2>
+        <div class="map-controls">
+            <label for="rainfall-period-select">Select Rainfall Period:</label>
+            <select id="rainfall-period-select">
+                <option value="3">Last 3 Days</option>
+                <option value="7" selected>Last 7 Days</option>
+                <option value="14">Last 14 Days</option>
+                <option value="30">Last 30 Days</option>
+                <option value="lastMonth">Last Complete Month</option>
+                <option value="thisMonth">This Month So Far</option>
+                <option value="jan">January</option>
+                <option value="feb">February</option>
+                <option value="mar">March</option>
+                <option value="apr">April</option>
+                <option value="may">May</option>
+                <option value="jun">June</option>
+                <option value="jul">July</option>
+                <option value="aug">August</option>
+                <option value="sep">September</option>
+                <option value="oct">October</option>
+                <option value="nov">November</option>
+                <option value="dec">December</option>
+            </select>
+        </div>
+        <div class="chart-container" id="rainfall-map-container">
+            <div id="rainfall-map"></div>
+            <div class="download-section">
+                <div class="buttons">
+                    <button id="download-rainfall-map" type="button">Download Map as PNG</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="error-container" id="error-container">
+            <div class="error-message" id="error-message"></div>
+            <button id="dismiss-error" type="button">Dismiss</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/appscript_integration.js"></script>
+    <script src="js/dataProcessor.js"></script>
+    <script src="js/rainfallMap.js"></script>
+    <script src="js/rainfallChartsApp.js"></script>
+</body>
+</html>

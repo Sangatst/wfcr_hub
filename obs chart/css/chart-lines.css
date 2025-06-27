@@ -1,0 +1,214 @@
+/* Temperature Chart Lines */
+
+/* Maximum Temperature Chart */
+.tmax-mean-line {
+    fill: none;
+    stroke: #3498db;
+    stroke-width: 2;
+}
+
+.tmax-max-line {
+    fill: none;
+    stroke: #f39c12;
+    stroke-width: 1;
+    stroke-dasharray: 1, 2;
+}
+
+.tmax-min-line {
+    fill: none;
+    stroke: #2ecc71;
+    stroke-width: 1;
+    stroke-dasharray: 1, 2;
+}
+
+.tmax-std-area {
+    fill: rgba(52, 152, 219, 0.1);
+}
+  
+.tmax-current-year-line {
+    fill: none;
+    stroke: #e74c3c;
+    stroke-width: 2;
+}
+
+.tmax-current-year-point {
+    fill: #e74c3c;
+    stroke: none;
+}
+
+.tmax-current-year-point-max {
+    fill: #f39c12;
+    stroke: #000;
+    stroke-width: 1;
+}
+
+.tmax-current-year-point-min {
+    fill: #2ecc71;
+    stroke: #000;
+    stroke-width: 1;
+}
+
+/* Minimum Temperature Chart */
+.tmin-mean-line {
+    fill: none;
+    stroke: #0077b6;
+    stroke-width: 2;
+}
+
+.tmin-max-line {
+    fill: none;
+    stroke: #48cae4;
+    stroke-width: 1;
+    stroke-dasharray: 1, 2;
+}
+
+.tmin-min-line {
+    fill: none;
+    stroke: #03045e;
+    stroke-width: 1;
+    stroke-dasharray: 1, 2;
+}
+
+.tmin-std-area {
+    fill: rgba(0, 119, 182, 0.1);
+}
+
+.tmin-current-year-line {
+    fill: none;
+    stroke: #be193f;
+    stroke-width: 2;
+}
+
+.tmin-current-year-point {
+    fill: #be193f;
+    stroke: none;
+}
+
+.tmin-current-year-point-max {
+    fill: #ff9500;
+    stroke: #000;
+    stroke-width: 1;
+}
+
+.tmin-current-year-point-min {
+    fill: #0077b6;
+    stroke: #000;
+    stroke-width: 1;
+}
+
+/* Mean Temperature Chart */
+.tmean-mean-line {
+    fill: none;
+    stroke: #27ae60;
+    stroke-width: 2;
+}
+
+.tmean-max-line {
+    fill: none;
+    stroke: #d35400;
+    stroke-width: 1;
+    stroke-dasharray: 1, 2;
+}
+
+.tmean-min-line {
+    fill: none;
+    stroke: #2980b9;
+    stroke-width: 1;
+    stroke-dasharray: 1, 2;
+}
+
+.tmean-std-area {
+    fill: rgba(39, 174, 96, 0.1);
+}
+
+.tmean-current-year-line {
+    fill: none;
+    stroke: #8e44ad;
+    stroke-width: 2;
+}
+
+.tmean-current-year-point {
+    fill: #8e44ad;
+    stroke: none;
+}
+
+.tmean-current-year-point-max {
+    fill: #e74c3c;
+    stroke: #000;
+    stroke-width: 1;
+}
+
+.tmean-current-year-point-min {
+    fill: #3498db;
+    stroke: #000;
+    stroke-width: 1;
+}
+
+/* Chart Labels */
+.max-label {
+    font-size: 12px;
+    font-weight: bold;
+    fill: #e74c3c;
+}
+
+.min-label {
+    font-size: 12px;
+    font-weight: bold;
+    fill: #3498db;
+}
+
+/* Grid and Axis Styling */
+.grid-line {
+    stroke: #ddd;
+    stroke-opacity: 0.7;
+    shape-rendering: crispEdges;
+}
+
+.axis path,
+.axis line {
+    stroke: #000;
+    stroke-width: 1.5;
+    shape-rendering: crispEdges;
+}
+
+.axis text {
+    font-size: 12px;
+    fill: #666;
+}
+
+/* Tooltip Styling */
+.tooltip {
+    position: absolute;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    pointer-events: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tooltip-date {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.tooltip-item {
+    margin: 3px 0;
+}
+
+.tooltip-color {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
+    border-radius: 2px;
+}
+
+.tooltip-label {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.tooltip-value {
+    font-weight: bold;
+} 

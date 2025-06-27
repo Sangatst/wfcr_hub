@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Observation Charts</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/chart-lines.css">
+    <!-- D3.js -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Temperature Observation Charts</h1>
+            <nav>
+                <a href="../index.html" class="nav-link back-link">← Back to Home</a>
+                <a href="rainfall_charts.html" class="nav-link">View Rainfall Charts</a>
+            </nav>
+        </header>
+
+        <div class="controls">
+            <div class="selectors">
+                <div class="selector-item">
+                    <label for="station">Select Station:</label>
+                    <select id="station">
+                        <!-- Will be populated dynamically -->
+                    </select>
+                </div>
+                <div class="selector-item">
+                    <label for="month">Filter by Month:</label>
+                    <select id="month">
+                        <option value="all">All Months</option>
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <div id="chart"></div>
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="color-box current-year"></div>
+                    <span>Current Year</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-box mean"></div>
+                    <span id="historical-mean-label">Historical Mean</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-box max"></div>
+                    <span id="historical-max-label">Historical Max</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-box min"></div>
+                    <span id="historical-min-label">Historical Min</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="download-section">
+            <div class="buttons">
+                <button id="download-stats" type="button">Download Statistics</button>
+                <button id="download-current" type="button">Download Current Year</button>
+                <button id="download-chart" type="button">Download Chart</button>
+            </div>
+        </div>
+
+        <div class="chart-interpretation">
+            <h3>Maximum Temperature Chart Interpretation</h3>
+            <p id="chart-summary">Select a station and month to view the interpretation.</p>
+
+            <div class="data-summary">
+                <h4>Maximum Temperature Extremes</h4>
+                <table id="temp-extremes-table">
+                    <thead>
+                        <tr>
+                            <th>Dataset</th>
+                            <th>Highest Tmax</th>
+                            <th>Date</th>
+                            <th>Lowest Tmax</th>
+                            <th>Date</th>
+                            <th>Mean Tmax</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="historical-extremes">
+                            <td>Historical</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                        </tr>
+                        <tr id="current-year-extremes">
+                            <td>Current Year</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Minimum Temperature Chart Section -->
+        <h2 class="section-title">Temperature Minimum Charts</h2>
+        <div class="chart-container" id="tmin-chart-container">
+            <div id="tmin-chart"></div>
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="color-box tmin-current-year"></div>
+                    <span>Current Year</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-box tmin-mean"></div>
+                    <span id="tmin-historical-mean-label">Historical Mean</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-box tmin-max"></div>
+                    <span id="tmin-historical-max-label">Historical Max</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-box tmin-min"></div>
+                    <span id="tmin-historical-min-label">Historical Min</span>
+                </div>
+            </div>
+
+            <div class="download-section">
+                <div class="buttons">
+                    <button id="download-tmin-stats" type="button">Download Statistics</button>
+                    <button id="download-tmin-current" type="button">Download Current Year</button>
+                    <button id="download-tmin-chart" type="button">Download Chart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-interpretation">
+            <h3>Minimum Temperature Chart Interpretation</h3>
+            <p id="tmin-chart-summary">Select a station and month to view the interpretation.</p>
+
+            <div class="data-summary">
+                <h4>Minimum Temperature Extremes</h4>
+                <table id="tmin-extremes-table">
+                    <thead>
+                        <tr>
+                            <th>Dataset</th>
+                            <th>Highest Tmin</th>
+                            <th>Date</th>
+                            <th>Lowest Tmin</th>
+                            <th>Date</th>
+                            <th>Mean Tmin</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="tmin-historical-extremes">
+                            <td>Historical</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                        </tr>
+                        <tr id="tmin-current-year-extremes">
+                            <td>Current Year</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Average Temperature Chart Section -->
+        <h2 class="section-title">Temperature Mean Charts</h2>
+        <div class="chart-container" id="tmean-chart-container">
+            <div id="tmean-chart"></div>
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="color-box tmean-current-year"></div>
+                    <span>Current Year</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-box tmean-mean"></div>
+                    <span id="tmean-historical-mean-label">Historical Average</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-box tmean-max"></div>
+                    <span id="tmean-historical-max-label">Historical Max</span>
+                </div>
+                <div class="legend-item">
+                    <div class="color-box tmean-min"></div>
+                    <span id="tmean-historical-min-label">Historical Min</span>
+                </div>
+            </div>
+
+            <div class="download-section">
+                <div class="buttons">
+                    <button id="download-tmean-stats" type="button">Download Statistics</button>
+                    <button id="download-tmean-current" type="button">Download Current Year</button>
+                    <button id="download-tmean-chart" type="button">Download Chart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-interpretation">
+            <h3>Average Temperature Chart Interpretation</h3>
+            <p id="tmean-chart-summary">Select a station and month to view the interpretation.</p>
+
+            <div class="data-summary">
+                <h4>Average Temperature Extremes</h4>
+                <table id="tmean-extremes-table">
+                    <thead>
+                        <tr>
+                            <th>Dataset</th>
+                            <th>Highest Tavg</th>
+                            <th>Date</th>
+                            <th>Lowest Tavg</th>
+                            <th>Date</th>
+                            <th>Average Tavg</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="tmean-historical-extremes">
+                            <td>Historical</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                        </tr>
+                        <tr id="tmean-current-year-extremes">
+                            <td>Current Year</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                            <td>--</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Loading data...</p>
+            <p id="loading-message">Initializing...</p>
+        </div>
+
+        <div class="error-container" id="error-container">
+            <div class="error-message" id="error-message"></div>
+            <button id="dismiss-error" type="button">Dismiss</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/appscript_integration.js"></script>
+    <script src="js/dataProcessor.js"></script>
+    <script src="js/chart.js"></script>
+    <script src="js/tminChart.js"></script>
+    <script src="js/tmeanChart.js"></script>
+    <script src="js/app_new.js"></script>
+
+    <!-- Add a script to handle errors -->
+    <script>
+        window.addEventListener('error', function(event) {
+            console.log('Caught error:', event.error);
+            // Display error in the UI
+            const errorContainer = document.getElementById('error-container');
+            const errorMessage = document.getElementById('error-message');
+            if (errorContainer && errorMessage) {
+                let errorText = 'An error occurred. Please check the console for details.';
+                if (event.error && event.error.message) {
+                    errorText = `Error: ${event.error.message}. Please check the console for details.`;
+                }
+                errorMessage.textContent = errorText;
+                errorContainer.classList.add('show');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forecasting Links | NCHM</title>
+    <link rel="stylesheet" href="climatedata.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@400;700;900&display=swap">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+        /* Inserted CSS from forecasting-tools.html lines 11-200 */
+        .tool-detail {
+            margin-bottom: 40px;
+            margin-top: 60px;
+            border-radius: var(--border-radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            background-color: var(--background-white);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .tool-detail:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        .tool-header {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 20px 25px;
+            position: relative;
+        }
+        .tool-header h3 {
+            margin: 0;
+            color: var(--text-light);
+            font-size: 1.5rem;
+        }
+        .tool-header p {
+            margin: 10px 0 0;
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+        .tool-body {
+            padding: 25px;
+        }
+        .tool-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: flex-start;
+        }
+        .tool-description {
+            flex: 3;
+            min-width: 300px;
+        }
+        .tool-image {
+            flex: 2;
+            min-width: 250px;
+            border-radius: var(--border-radius-sm);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        .tool-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        .tool-detail:hover .tool-image img {
+            transform: scale(1.03);
+        }
+        .tool-features {
+            margin-top: 20px;
+            background-color: var(--background-light);
+            padding: 15px;
+            border-radius: var(--border-radius-sm);
+            border-left: 3px solid var(--accent-color);
+        }
+        .tool-features h4 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+        .tool-features ul {
+            padding-left: 20px;
+            columns: 2;
+            column-gap: 30px;
+        }
+        .tool-features li {
+            margin-bottom: 8px;
+            break-inside: avoid;
+        }
+        .back-link {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: var(--border-radius-sm);
+            transition: all 0.3s ease;
+        }
+        .back-link:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        .data-table {
+            width: 90%;
+            border-collapse: collapse;
+            margin: 20px auto;
+            font-size: 0.9rem;
+            box-shadow: var(--shadow-sm);
+            border-radius: var(--border-radius-sm);
+            overflow: hidden;
+            background-color: var(--background-white);
+            table-layout: fixed;
+        }
+        .data-table th {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            text-align: left;
+            padding: 12px 15px;
+            font-weight: 600;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            -webkit-hyphens: auto;
+            hyphens: auto;
+            font-size: 0.85rem;
+        }
+        .data-table td {
+            padding: 10px 15px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            vertical-align: top;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            -webkit-hyphens: auto;
+            hyphens: auto;
+        }
+        .data-table tr:nth-child(even) {
+            background-color: var(--background-light);
+        }
+        .data-table tr:hover {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+        .data-table a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .data-table a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+        .data-table th:nth-child(1) { width: 15%; }
+        .data-table th:nth-child(2) { width: 30%; }
+        .data-table th:nth-child(3), .data-table th:nth-child(4) { width: 12%; }
+        .data-table th:nth-child(5) { width: 31%; }
+        .table-container { width: 100%; }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <header>
+            <h1>Meteorological Services Division</h1>
+            <h3>Weather Forecasting Section</h3>
+        </header>
+        <nav class="main-nav">
+            <div class="nav-container">
+                <div class="social-container">
+                    <a href="https://www.facebook.com/NationalCentreforHydrologyandMeteorology" target="_blank" rel="noopener" class="social-link" title="NCHM Facebook Page"><i class="fa fa-facebook"></i></a>
+                </div>
+                <button type="button" class="menu-toggle" id="menuToggle" title="Toggle Menu">
+                    <span class="menu-icon"></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="index.html#home" class="home-link"><i class="fa fa-home"></i> Home</a></li>
+                    <li><a href="index.html#forecasting">Forecasting Tools</a></li>
+                    <li><a href="index.html#weather-services">Weather Services</a></li>
+                    <li><a href="index.html#climate-guidance">Climate Guidance</a></li>
+                    <li><a href="index.html#verification">Verification</a></li>
+                    <li><a href="index.html#weather-formats">Weather Formats</a></li>
+                    <li><a href="system-ip-and-urls.html">Systems</a></li>
+                </ul>
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Search..." aria-label="Search">
+                    <button type="button" id="search-button" title="Search"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </nav>
+        <main class="main-content">
+            <section class="content-section">
+                <div class="section-header">
+                    <h2>Forecasting Links</h2>
+                </div>
+                <div class="section-content">
+                    <a href="index.html#forecasting" class="back-link"><i class="fa fa-arrow-left"></i> Back to Dashboard</a>
+                    <div class="tool-detail" data-aos="fade-up" data-aos-delay="100">
+                        <div class="tool-header">
+                            <h3>Forecasting Links</h3>
+                            <p>Access to external weather forecasting resources and websites</p>
+                        </div>
+                        <div class="tool-body">
+                            <div class="tool-content">
+                                <div class="tool-description">
+                                    <p>The Center analyzes from open and access-allowed to national meteorological and hydrological service providers' hydrometeorological websites. The forecasters on duty shall input the information from the following websites. These websites will be the base platforms and forecast guidance is not limited to these sites.</p>
+                                    <ul class="link-list">
+                                        <li><a href="https://www.imd.gov.in" target="_blank" rel="noopener noreferrer">India Meteorological Department</a></li>
+                                        <li><a href="https://www.monsoondata.org" target="_blank" rel="noopener noreferrer">Indian Monsoon data Regional output</a></li>
+                                        <li><a href="https://www.ncmrwf.gov.in" target="_blank" rel="noopener noreferrer">National Center for Medium-Range Weather Forecasting</a></li>
+                                        <li><a href="https://srf.tropmet.res.in/srf/hires_gefs/index.php" target="_blank" rel="noopener noreferrer">Short Range Ensemble Prediction System</a></li>
+                                        <li><a href="https://tropmet.res.in/" target="_blank" rel="noopener noreferrer">Indian Institute of Tropical Meteorology</a></li>
+                                        <li><a href="http://nwp.imd.gov.in/mme/fdp-bob/login.php" target="_blank" rel="noopener noreferrer">Severe Weather Forecast Project</a></li>
+                                        <li><a href="https://rsmcnewdelhi.imd.gov.in/" target="_blank" rel="noopener noreferrer">Regional Specialized Meteorological Center for Tropical Cyclones Over North Indian Ocean, IMD</a></li>
+                                        <li><a href="https://www.tmd.go.th/supportData/synopticCharts" target="_blank" rel="noopener noreferrer">Thai Meteorological Department</a></li>
+                                        <li><a href="http://rsapp.nsmc.org.cn/geofy/en/" target="_blank" rel="noopener noreferrer">China Meteorological Administration</a></li>
+                                        <li><a href="https://charts.ecmwf.int" target="_blank" rel="noopener noreferrer">European Center for Medium-Range Weather Forecast</a></li>
+                                        <li><a href="https://www.metgis.com" target="_blank" rel="noopener noreferrer">MetGIS</a></li>
+                                        <li><a href="https://www.meteoblue.com" target="_blank" rel="noopener noreferrer">Meteoblue</a></li>
+                                        <li><a href="https://www.windy.com" target="_blank" rel="noopener noreferrer">Windy.com</a></li>
+                                        <li><a href="https://103.215.208.77/SASIAFFG_CONSOLE/index.php?region=0" target="_blank" rel="noopener noreferrer">South Asian Flash Flood Guidance</a></li>
+                                        <li><a href="https://www.tropicaltidbits.com/analysis/models/" target="_blank" rel="noopener noreferrer">Tropical Tidbits</a></li>
+                                        <li><a href="https://earth.nullschool.net/" target="_blank" rel="noopener noreferrer">Earth Null School</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <footer class="footer">
+                <p class="address">Weather Forecasting Section, MSD</p>
+                <p class="email"><i>wfcr@nchm.gov.bt</i></p>
+                <p class="phone">+975-335578 | +975-77452632</p>
+            </footer>
+            <button type="button" id="back-to-top" title="Back to top"><i class="fa fa-arrow-up" aria-hidden="true"></i><span class="sr-only">Back to top</span></button>
+        </main>
+    </div>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, easing: 'ease', once: true });
+        // Back to top button functionality
+        const backToTopButton = document.getElementById('back-to-top');
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html> 

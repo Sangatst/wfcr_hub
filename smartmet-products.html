@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartMet Products | NCHM</title>
+    <link rel="stylesheet" href="climatedata.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@400;700;900&display=swap">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+        /* Inserted CSS from forecasting-tools.html lines 11-200 */
+        .tool-detail {
+            margin-bottom: 40px;
+            margin-top: 60px;
+            border-radius: var(--border-radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            background-color: var(--background-white);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .tool-detail:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        .tool-header {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 20px 25px;
+            position: relative;
+        }
+        .tool-header h3 {
+            margin: 0;
+            color: var(--text-light);
+            font-size: 1.5rem;
+        }
+        .tool-header p {
+            margin: 10px 0 0;
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+        .tool-body {
+            padding: 25px;
+        }
+        .tool-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: flex-start;
+        }
+        .tool-description {
+            flex: 3;
+            min-width: 300px;
+        }
+        .tool-image {
+            flex: 2;
+            min-width: 250px;
+            border-radius: var(--border-radius-sm);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        .tool-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        .tool-detail:hover .tool-image img {
+            transform: scale(1.03);
+        }
+        .tool-features {
+            margin-top: 20px;
+            background-color: var(--background-light);
+            padding: 15px;
+            border-radius: var(--border-radius-sm);
+            border-left: 3px solid var(--accent-color);
+        }
+        .tool-features h4 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+        .tool-features ul {
+            padding-left: 20px;
+            columns: 2;
+            column-gap: 30px;
+        }
+        .tool-features li {
+            margin-bottom: 8px;
+            break-inside: avoid;
+        }
+        .back-link {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: var(--border-radius-sm);
+            transition: all 0.3s ease;
+        }
+        .back-link:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        .data-table {
+            width: 90%;
+            border-collapse: collapse;
+            margin: 20px auto;
+            font-size: 0.9rem;
+            box-shadow: var(--shadow-sm);
+            border-radius: var(--border-radius-sm);
+            overflow: hidden;
+            background-color: var(--background-white);
+            table-layout: fixed;
+        }
+        .data-table th {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            text-align: left;
+            padding: 12px 15px;
+            font-weight: 600;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            -webkit-hyphens: auto;
+            hyphens: auto;
+            font-size: 0.85rem;
+        }
+        .data-table td {
+            padding: 10px 15px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            vertical-align: top;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            -webkit-hyphens: auto;
+            hyphens: auto;
+        }
+        .data-table tr:nth-child(even) {
+            background-color: var(--background-light);
+        }
+        .data-table tr:hover {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+        .data-table a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .data-table a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+        .data-table th:nth-child(1) { width: 15%; }
+        .data-table th:nth-child(2) { width: 30%; }
+        .data-table th:nth-child(3), .data-table th:nth-child(4) { width: 12%; }
+        .data-table th:nth-child(5) { width: 31%; }
+        .table-container { width: 100%; }
+
+        /* New styles for product sections */
+        .product-section {
+            margin: 40px 0;
+            padding: 30px;
+            background-color: var(--background-white);
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-sm);
+        }
+        .product-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+        .controls-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+            align-items: center;
+        }
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .control-group label {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+        .control-group select,
+        .control-group input {
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius-sm);
+            font-size: 0.9rem;
+            min-width: 200px;
+        }
+        .control-group select:focus,
+        .control-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.1);
+        }
+        .product-display {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .product-display img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius-sm);
+            box-shadow: var(--shadow-md);
+            border: 1px solid #ddd;
+        }
+        .product-url {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: var(--background-light);
+            border-radius: var(--border-radius-sm);
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            word-break: break-all;
+            color: var(--text-dark);
+        }
+        .wms-link {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 15px 25px;
+            background-color: var(--secondary-color);
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: var(--border-radius-sm);
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        .wms-link:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+        }
+        .error-message {
+            color: #dc3545;
+            text-align: center;
+            padding: 20px;
+            background-color: #f8d7da;
+            border-radius: var(--border-radius-sm);
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <header>
+            <h1>Meteorological Services Division</h1>
+            <h3>Weather Forecasting Section</h3>
+        </header>
+        <nav class="main-nav">
+            <div class="nav-container">
+                <div class="social-container">
+                    <a href="https://www.facebook.com/NationalCentreforHydrologyandMeteorology" target="_blank" rel="noopener" class="social-link" title="NCHM Facebook Page"><i class="fa fa-facebook"></i></a>
+                </div>
+                <button type="button" class="menu-toggle" id="menuToggle" title="Toggle Menu">
+                    <span class="menu-icon"></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="index.html#home" class="home-link"><i class="fa fa-home"></i> Home</a></li>
+                    <li><a href="index.html#forecasting">Forecasting Tools</a></li>
+                    <li><a href="index.html#weather-services">Weather Services</a></li>
+                    <li><a href="index.html#climate-guidance">Climate Guidance</a></li>
+                    <li><a href="index.html#verification">Verification</a></li>
+                    <li><a href="index.html#weather-formats">Weather Formats</a></li>
+                    <li><a href="system-ip-and-urls.html">Systems</a></li>
+                </ul>
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Search..." aria-label="Search">
+                    <button type="button" id="search-button" title="Search"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        </nav>
+        <main class="main-content">
+            <section class="content-section">
+                <div class="section-header">
+                    <h2>SmartMet Products</h2>
+                </div>
+                <div class="section-content">
+                    <a href="index.html#forecasting" class="back-link"><i class="fa fa-arrow-left"></i> Back to Dashboard</a>
+                    <div class="tool-detail" data-aos="fade-up" data-aos-delay="200">
+                        <div class="tool-header">
+                            <h3>SmartMet Products</h3>
+                            <p>Visualization and editing tools for meteorological data</p>
+                        </div>
+                        <div class="tool-body">
+                            <div class="tool-content">
+                                <div class="tool-description">
+                                    <p>Smartmet is a software tool for visualizing and editing the meteorological data developed by Finnish Meteorological Institute. The tool provides the forecaster to modify the numerical weather model (Weather Research and Forecasting Model) output taking into account all the available observations and the meteorologist's own expertise.</p>
+                                    <p>Finnish Meteorological Institute deployed Smartmet Weather Information System for the National Center for Hydrology and Meteorology, on 2017 in UNDP funded NAPA-project. Training of the system has been carried out in two parts during 2018 with funding of World Bank project. Smartmet have been operational since November, 2018.</p>
+                                    <p>SmartMet gives the forecasters the possibility to change the model data (i.e. improve data) and to bring out the improved data from parameter to parameter as grid formatted information. From these improved grid-files, which the forecaster has edited, it's possible to create tailor-made weather forecasts for unlimited amount of users in the most economical and efficient way.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dali Products Section -->
+                    <div class="product-section" data-aos="fade-up" data-aos-delay="300">
+                        <h3><i class="fa fa-image"></i> Dali Products</h3>
+                        <p>Dynamic weather visualization products with customizable parameters.</p>
+                        
+                        <div class="controls-container">
+                            <div class="control-group">
+                                <label for="product-select">Product:</label>
+                                <select id="product-select">
+                                    <option value="temperature_8_prod">Temperature 8 Day Product</option>
+                                    <option value="rain_warning">Rain Warning</option>
+                                    <option value="district_forecast">District Forecast</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <label for="customer-select">Customer:</label>
+                                <select id="customer-select">
+                                    <option value="nchm">NCHM</option>
+                                    <option value="test">Test</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <label for="date-select">Date:</label>
+                                <input type="date" id="date-select">
+                            </div>
+                            <div class="control-group">
+                                <label for="time-select">Time:</label>
+                                <input type="time" id="time-select" value="09:00">
+                            </div>
+                        </div>
+
+                        <div class="product-display" id="dali-product-display">
+                            <div class="loading">Select parameters to view the product</div>
+                        </div>
+                    </div>
+
+                    <!-- WMS Layers Section -->
+                    <div class="product-section" data-aos="fade-up" data-aos-delay="400">
+                        <h3><i class="fa fa-map"></i> WMS Layers</h3>
+                        <p>Web Map Service layers for interactive weather mapping and visualization.</p>
+                        <a href="WMS_Layer/index.html" class="wms-link">
+                            <i class="fa fa-external-link"></i> Access WMS Layers
+                        </a>
+                    </div>
+                </div>
+            </section>
+            <footer class="footer">
+                <p class="address">Weather Forecasting Section, MSD</p>
+                <p class="email"><i>wfcr@nchm.gov.bt</i></p>
+                <p class="phone">+975-335578 | +975-77452632</p>
+            </footer>
+            <button type="button" id="back-to-top" title="Back to top"><i class="fa fa-arrow-up" aria-hidden="true"></i><span class="sr-only">Back to top</span></button>
+        </main>
+    </div>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, easing: 'ease', once: true });
+        
+        // Back to top button functionality
+        const backToTopButton = document.getElementById('back-to-top');
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Dali Products functionality
+        const productSelect = document.getElementById('product-select');
+        const customerSelect = document.getElementById('customer-select');
+        const dateSelect = document.getElementById('date-select');
+        const timeSelect = document.getElementById('time-select');
+        const productDisplay = document.getElementById('dali-product-display');
+
+        // Set default date to today
+        const today = new Date();
+        dateSelect.value = today.toISOString().split('T')[0];
+
+        function updateDaliProduct() {
+            const product = productSelect.value;
+            const customer = customerSelect.value;
+            const date = dateSelect.value;
+            const time = timeSelect.value;
+
+            if (!date || !time) {
+                productDisplay.innerHTML = '<div class="loading">Please select both date and time</div>';
+                return;
+            }
+
+            // Format date and time for URL (YYYYMMDDHHMM format)
+            const dateTime = new Date(`${date}T${time}`);
+            const formattedDateTime = dateTime.getFullYear().toString() +
+                String(dateTime.getMonth() + 1).padStart(2, '0') +
+                String(dateTime.getDate()).padStart(2, '0') +
+                String(dateTime.getHours()).padStart(2, '0') +
+                String(dateTime.getMinutes()).padStart(2, '0');
+
+            const daliUrl = `http://202.144.145.99:8080/dali?customer=${customer}&product=${product}&time=${formattedDateTime}&type=png`;
+
+            // Show loading
+            productDisplay.innerHTML = '<div class="loading">Loading product...</div>';
+
+            // Create image element
+            const img = document.createElement('img');
+            img.alt = `${product} for ${date} at ${time}`;
+            img.style.maxWidth = '100%';
+            img.style.height = 'auto';
+
+            // Create URL display
+            const urlDiv = document.createElement('div');
+            urlDiv.className = 'product-url';
+            urlDiv.textContent = daliUrl;
+
+            // Handle image load
+            img.onload = function() {
+                productDisplay.innerHTML = '';
+                productDisplay.appendChild(img);
+                productDisplay.appendChild(urlDiv);
+            };
+
+            // Handle image error
+            img.onerror = function() {
+                productDisplay.innerHTML = `
+                    <div class="error-message">
+                        <i class="fa fa-exclamation-triangle"></i>
+                        Unable to load the product image. Please check your parameters and try again.
+                    </div>
+                    <div class="product-url">${daliUrl}</div>
+                `;
+            };
+
+            // Set image source
+            img.src = daliUrl;
+        }
+
+        // Add event listeners
+        productSelect.addEventListener('change', updateDaliProduct);
+        customerSelect.addEventListener('change', updateDaliProduct);
+        dateSelect.addEventListener('change', updateDaliProduct);
+        timeSelect.addEventListener('change', updateDaliProduct);
+
+        // Initialize with default values
+        updateDaliProduct();
+    </script>
+</body>
+</html> 
