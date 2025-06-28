@@ -2,7 +2,7 @@ import { format, addDays, parseISO } from 'date-fns';
 import { iconDescriptions } from '../components/weather/icon_mapping.js';
 
 // Base API URLs without query parameters
-const API_BASE_URL = 'http://202.144.145.99:8080/timeseries';
+const API_BASE_URL = 'https://your-proxy.onrender.com/timeseries';
 const ADMIN_API_URL = 'http://202.144.145.99:8080/admin';
 
 export const regionCoordinates = {
