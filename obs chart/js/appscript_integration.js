@@ -32,7 +32,7 @@ class AppScriptDataProcessor {
     constructor() {
         // Google Apps Script web app URLs
         this.HISTORICAL_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbymNbbSedbEMk0IeMfO7DFRwvosj8aMtRwPHN76UH16tUFA7Z_IlDW88VTEykzMTVbFgQ/exec';
-        this.CURRENT_YEAR_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwg4z5gwusa3RH3mOVdQueL_kyMvWxX1-l2N9GrwLR06j7UZeAvKuJniU_nHFamEoryPg/exec';
+        this.CURRENT_YEAR_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxM6O1AWeW7MhHSR24v0GwMbVEbKz9fupdb8ikncmOcEGmLE7N2nij_mi-6go9SVZT5Dw/exec';
 
         // Performance optimizations
         this.DEBUG_MODE = false; // Set to false to reduce logging
